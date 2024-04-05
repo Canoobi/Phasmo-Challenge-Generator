@@ -1,1 +1,0 @@
-Bei Java-Error, Installationsanweisung in readme.MD lesen!
