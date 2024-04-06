@@ -1,5 +1,6 @@
-# Phasmophobia-Challenge-Generator
-PhasmoChallengeGenerator ist ein Programm zur Generierung von zufälligen Herausforderungen für das Spiel 'Phasmophobia'.
+# Phasmophobia-Challenge-Generator (German)
+(For english-version see below)\
+Phasmo-Challenge-Generator ist ein Programm zur zufälligen Auswahl von Herausforderungen für das Spiel 'Phasmophobia'.
 
 ## Beschreibung
 Das Programm ermöglicht es Benutzern, ein "Chellenge-Wheel" zu drehen, um zufällige Herausforderungen zu erhalten, die sie während des Spiels erfüllen müssen. Die Herausforderungen werden aus einer JSON-Datei geladen, die die verschiedenen Aufgaben enthält
@@ -45,5 +46,57 @@ In der Datei ```src\resources\tasks.json``` sind die einzelnen Aufgaben gespeich
 In der Datei ```src\resources\items.json``` sind alle im Spiel verfügbaren Items hinterlegt.
 
 ## Mitwirkende
+@Josefine (Challenges)\
+@Carlo (Challenge Generator)
+
+# ------------------------------------------------------------------
+
+# Phasmophobia Challenge Generator (English)
+Phasmo-Challenge-Generator is a program for the random selection of challenges for the game 'Phasmophobia'.
+
+## Description
+The program allows users to spin a "Challenge Wheel" to receive random challenges they must complete during the game. The challenges are loaded from a JSON file that contains various tasks.
+
+## Features
+- Spin the Challenge Wheel to receive a random challenge.
+- Display the challenge in a GUI window.
+- Support for various challenges loaded from a JSON file.
+
+## Usage
+1. Download the latest release from [GitHub](https://github.com/Canoobi/Phasmo-Challenge-Generator/releases).
+2. Make sure you have Java installed (see 'Java Installation' also).
+3. Run the file ```"\Phasmo-Challenge-Generator\PhasmoChallengeGen.exe"```.
+4. A warning with "Windows protected your PC" should open. Follow these steps:
+   - Click on 'More info'.
+   - Click 'Run anyway'.
+5. Click the "Spin" button to get a new challenge.
+6. Have fun with the challenge!
+
+## Creating Your Own Version
+To create your own version of the Phasmo Challenge Generator, follow these steps:
+1. Clone the current repository.
+2. Open the local repository with IntelliJ.
+3. Add your tasks to the file ```src\resources\tasks.json``` as follows:
+   - ```{"text": "%Insert your task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%"}``` for a normal task without any functionality.
+   - ```{"text": "%Insert your task here%", "openSelectItemFrame": "true", "message": "%Optionally insert a different output message%"}``` for a task where the item selection frame should open (note the timer and that each item can only be selected once).
+   - ```{"text": "%Insert your [items] task here%", "openSelectItemFrame": "false", "message": "%MANDATORY: Insert an output message here%"}``` for a task where 2 to 12 random items should be appended to the end of the task. Note that ```[items]``` must be present in the task!
+   - ```{"text": "%Insert your [numb] task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%"}``` for a task where a random number between 1 and 8 should be included. Note that ```[numb]``` must be present in the task! If a different output message is to be used, ```[numb]``` must also be included in it.
+4. Create a JAR file as an artifact. Note that the 'json-simple' library must be included.
+5. Install and start Launch4j. Choose an output file and the JAR file and create the EXE file.
+6. Congratulations, you have created your own version of the Phasmo Challenge Generator. To use it, continue from point 2 under 'Usage'.
+
+## Java Installation
+1. Download and install the following:
+   - [jdk](https://www.oracle.com/java/technologies/downloads/#jdk22-windows)
+   - [jre](https://www.oracle.com/java/technologies/downloads/#jdk22-windows)
+2. Change or add the following system environment variables:
+   - JAVA_HOME &rarr; C:\Program Files\Java\jdk-22 (jdk installation path)
+   - PATH &rarr; C:\Program Files (x86)\Java\jre-1.8\bin (jre installation path)
+
+## JSON Files
+The file ```src\resources\tasks.json``` stores the individual tasks. Follow the instructions under 'Creating Your Own Version' to use the randomizer for your own tasks!
+The file ```src\resources\items.json``` contains all items available in the game.
+
+## Contributors
 @Josefine (Challenges)\
 @Carlo (Challenge Generator)
