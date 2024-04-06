@@ -119,7 +119,7 @@ public class ChallengeRad extends JFrame {
                         setButton(true);
                     } else if (elements[currentIndex][0].contains("[numb]")) { // random number between 1 and 8
                         int numberOfItems = 1 + random.nextInt(8);
-                        if (elements[currentIndex][2].isEmpty()) {
+                        if (elements[currentIndex][2].contains("[numb]")) {
                             resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>" + elements[currentIndex][0].replace("[numb]", String.valueOf(numberOfItems)) + "</div></html>");
                         } else {
                             resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>" + elements[currentIndex][2].replace("[numb]", String.valueOf(numberOfItems)) + "</div></html>");
@@ -165,7 +165,6 @@ public class ChallengeRad extends JFrame {
 
     public static void main(String[] args) {
         String[][] wheelElements = readElementsFromJSON("/tasks.json", "openSelectItemFrame");
-        //String[] wheelElements = readElementsFromJSON("A:/Dokumente/Privat/PhasmoChalGenerator/PhasmoChallengeGenerator/out/production/PhasmoChallengeGenerator/resources/tasks.json");
 
         for (int i = 0; i < wheelElements.length; i++) {
             System.out.println(i + ": " + wheelElements[i][0] + "; " + wheelElements[i][1]);
