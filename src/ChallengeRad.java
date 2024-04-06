@@ -26,7 +26,7 @@ public class ChallengeRad extends JFrame {
 
         setTitle("Challenge-Wheel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(1200, 900);
         setLocationRelativeTo(null);
 
         createComponents();
@@ -39,18 +39,28 @@ public class ChallengeRad extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
+        JPanel westBlock = new JPanel();
+        westBlock.setPreferredSize(new Dimension(100, 800));
+        westBlock.setBackground(Color.WHITE);
+
+        JPanel eastBlock = new JPanel();
+        eastBlock.setPreferredSize(new Dimension(100, 800));
+        eastBlock.setBackground(Color.WHITE);
+
         JPanel wheelPanel = new JPanel();
         wheelPanel.setLayout(new GridLayout(1, 1));
-        wheelPanel.setBackground(Color.GREEN);
-        //TODO set color to white and button to green/red
-        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Drücke 'Spin' um zu starten<br></div></html>");
+        wheelPanel.setBackground(Color.WHITE);
+        resultLabel = new JLabel("<html><div style='font-size: 26px; text-align: center;'>Drücke 'Spin' um zu starten<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wheelPanel.add(resultLabel);
 
         spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Spin<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
-        spinButton.setPreferredSize(new Dimension(200, 80)); //button size
+        spinButton.setPreferredSize(new Dimension(1200, 100));
+        spinButton.setBackground(Color.GREEN);
 
+        mainPanel.add(westBlock, BorderLayout.WEST);
+        mainPanel.add(eastBlock, BorderLayout.EAST);
         mainPanel.add(wheelPanel, BorderLayout.CENTER);
         mainPanel.add(spinButton, BorderLayout.SOUTH);
 
@@ -66,6 +76,11 @@ public class ChallengeRad extends JFrame {
 
     public static void setButton(boolean boo) {
         spinButton.setEnabled(boo);
+        if (boo) {
+            spinButton.setBackground(Color.GREEN);
+        } else {
+            spinButton.setBackground(Color.RED);
+        }
     }
 
     private void spinWheel() {
@@ -136,7 +151,6 @@ public class ChallengeRad extends JFrame {
             String[][] elements = new String[jsonArray.size()][3];
             for (int i = 0; i < jsonArray.size(); i++) {
                 JSONObject item = (JSONObject) jsonArray.get(i);
-                //JSONArray item = (JSONArray) jsonArray.get(i);
                 System.out.println(item.toString());
                 elements[i][0] = (String) item.get("text"); // Text
                 elements[i][1] = (String) item.get(varname); // Variable

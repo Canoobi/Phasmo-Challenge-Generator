@@ -21,13 +21,16 @@ public class SelectItemFrame extends JFrame {
     public SelectItemFrame() {
         setTitle("Select Item");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(400, 300);
+        setSize(600, 450);
         setLocationRelativeTo(null);
 
         selectedItems = new HashSet<>();
         random = new Random();
 
         createComponents();
+
+        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/icon.png"));
+        setIconImage(icon.getImage());
 
         setVisible(true);
 
@@ -43,31 +46,32 @@ public class SelectItemFrame extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        // Timer-Anzeige Panel
+        // Timer-Panel
         JPanel timerPanel = new JPanel();
-        JLabel timerLabel = new JLabel("Zeit bis zum nächsten Item:");
+        timerPanel.setPreferredSize(new Dimension(600, 50));
+        JLabel timerLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>Zeit bis zum nächsten Item:<br></div></html>");
         timerPanel.add(timerLabel);
-        timeRemainingLabel = new JLabel(Integer.toString(waitingTime));
+        timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + Integer.toString(waitingTime) + " Sekunden</div></html>");
         timerPanel.add(timeRemainingLabel);
 
-        // Resultat und Spin-Button Panel
+        // Result- and Spin-Button-Panel
         JPanel resultPanel = new JPanel();
         resultPanel.setLayout(new BorderLayout());
         wheelPanel = new JPanel();
         wheelPanel.setLayout(new GridLayout(1, 1));
         wheelPanel.setBackground(Color.GREEN);
-        resultLabel = new JLabel("<html><div style='font-size: 18px; text-align: center;'>Drücke 'Spin' um zu starten<br></div></html>");
+        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Drücke 'Spin' um zu starten<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wheelPanel.add(resultLabel);
 
-        spinButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Spin<br></div></html>");
+        spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Spin<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
-        spinButton.setPreferredSize(new Dimension(200, 80)); // Set button size
+        spinButton.setPreferredSize(new Dimension(600, 100));
 
         resultPanel.add(wheelPanel, BorderLayout.CENTER);
         resultPanel.add(spinButton, BorderLayout.SOUTH);
 
-        // Haupt-Panel
+        // Main-Panel
         mainPanel.add(timerPanel, BorderLayout.NORTH);
         mainPanel.add(resultPanel, BorderLayout.CENTER);
 
@@ -94,7 +98,7 @@ public class SelectItemFrame extends JFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    timeRemainingLabel.setText(Integer.toString(timeLeft));
+                    timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + Integer.toString(timeLeft) + " Sekunden</div></html>");
                     if (timeLeft == 0) {
                         ((Timer) e.getSource()).stop();
                         wheelPanel.setBackground(Color.GREEN);
@@ -108,7 +112,7 @@ public class SelectItemFrame extends JFrame {
             timer.start();
             wheelPanel.setBackground(Color.RED);
             String selectedItem = selectRandomItem();
-            resultLabel.setText("<html><div style='font-size: 18px; text-align: center; color: black;'>Item:<br>" + selectedItem + "</div></html>");
+            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Item:<br>" + selectedItem + "</div></html>");
         }
     }
 
