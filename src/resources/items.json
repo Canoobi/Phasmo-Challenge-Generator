@@ -1,22 +1,102 @@
 [
-  "D.O.T.S. Projector",
-  "EMF Reader",
-  "Ghost Writing Book",
-  "Spirit Box",
-  "Thermometer",
-  "UV Light",
-  "Video Camera",
-  "Flashlight",
-  "Crucifix",
-  "Firelight",
-  "Head Gear",
-  "Igniter",
-  "Incense",
-  "Motion Sensor",
-  "Parabolic Microphone",
-  "Photo Camera",
-  "Salt",
-  "Sanity Medication",
-  "Sound Sensor",
-  "Tripod"
+  {
+    "text": "Crucifix",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "D.O.T.S. Projector",
+    "itemtype": "starter",
+    "message": ""
+  },
+  {
+    "text": "EMF Reader",
+    "itemtype": "starter",
+    "message": ""
+  },
+  {
+    "text": "Firelight",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Flashlight",
+    "itemtype": "starter",
+    "message": ""
+  },
+  {
+    "text": "Ghost Writing Book",
+    "itemtype": "starter",
+    "message": ""
+  },
+  {
+    "text": "Head Gear",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Igniter",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Incense",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Motion Sensor",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Parabolic Microphone",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Photo Camera",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Salt",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Sanity Medication",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Sound Sensor",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "Spirit Box",
+    "itemtype": "starter",
+    "message": ""
+  },
+  {
+    "text": "Thermometer",
+    "itemtype": "starter",
+    "message": ""
+  },
+  {
+    "text": "Tripod",
+    "itemtype": "optional",
+    "message": ""
+  },
+  {
+    "text": "UV Light",
+    "itemtype": "starter",
+    "message": ""
+  },
+  {
+    "text": "Video Camera",
+    "itemtype": "starter",
+    "message": ""
+  }
 ]

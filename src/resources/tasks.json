@@ -1,28 +1,132 @@
 [
-  "Alle Kuscheltiere in den Van bringen, bevor der Geist ermittelt wird.",
-  "Nicht verstecken, nur wegrennen",
-  "Cursed Item zuerst nutzen",
-  "No Sound",
-  "Alle gehen mit Kopfkamera rein (ohne Taschenlampe), einer bleibt im Van und lotst die Spieler",
-  "Kerze only",
-  "Jedes Versteck nur einmal nutzen",
-  "Nicht rennen",
-  "Nur eine Person pro Raum",
-  "Nur rückwärts laufen",
-  "Das Haus ordentlich hinterlassen - ggf. nach jedem Hunt aufräumen",
-  "Alle Ausrüstungsgegenstände vor Abfahrt zurück in den Van bringen",
-  "Alle Spieler bleiben zusammen",
-  "Nicht sprechen",
-  "Kein Walkie Talkie verwenden",
-  "Den Geisternamen vor/nach jedem Satz sagen - sonst Strafe",
-  "Hide and Seek: alle Spieler verstecken sich, einer muss suchen, beim Hunt wechselt der Sucher, wer am längsten überlebt, gewinnt",
-  "Geräusche während des Hunts machen",
-  "Alle Items aus dem Haus in den Van bringen",
-  "Am Anfang & Ende der Runde und nach jedem Hunt & Event einmal durch das ganze Haus rennen (jeder Raum)",
-  "Big Brother: Alle Cams ins Haus. Einer geht rein und versucht alles alleine zu machen, während die anderen von draußen zusehen",
-  "Versus-Challenge: Wer als erstes alle anderen umgebracht hat, hat gewonnen (gleiche Voraussetzungen, z.B. Anzahl Räucherstäbchen)",
-  "Versus-Challenge: Wer als erstes den Geist herausgefunden hat, hat gewonnen. Alle anderen müssen sofort rauskommen und gamblen",
-  "Mit Zufallsrad entscheiden, welches Item als nächstes mit ins Haus genommen werden darf",
-  "Mit Zufallsrad entscheiden, welche x Items nicht verwendet werden dürfen",
-  "Eine Maximalanzahl x an Gegenstände mit rein nehmen, dann im Haus eingesperrt"
+  {
+    "text": "Alle Kuscheltiere in den Van bringen, bevor der Geist ermittelt wird.",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Nicht verstecken, nur wegrennen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Cursed Item zuerst nutzen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "No Sound",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Alle gehen mit Kopfkamera rein (ohne Taschenlampe), einer bleibt im Van und lotst die Spieler",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Kerze only",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Jedes Versteck nur einmal nutzen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Nicht rennen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Nur eine Person pro Raum",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Nur rückwärts laufen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Das Haus ordentlich hinterlassen - ggf. nach jedem Hunt aufräumen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Alle Ausrüstungsgegenstände vor Abfahrt zurück in den Van bringen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Alle Spieler bleiben zusammen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Nicht sprechen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Kein Walkie Talkie verwenden",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Den Geisternamen vor/nach jedem Satz sagen - sonst Strafe",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Hide and Seek: alle Spieler verstecken sich, einer muss suchen, beim Hunt wechselt der Sucher, wer am längsten überlebt, gewinnt",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Geräusche während des Hunts machen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Alle Items aus dem Haus in den Van bringen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Am Anfang & Ende der Runde und nach jedem Hunt & Event einmal durch das ganze Haus rennen (jeder Raum)",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "'Big Brother': Alle Cams ins Haus. Einer geht rein und versucht alles alleine zu machen, während die anderen von draußen zusehen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Versus-Challenge: Wer als erstes alle anderen umgebracht hat, hat gewonnen (gleiche Voraussetzungen, z.B. Anzahl Räucherstäbchen)",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Versus-Challenge: Wer als erstes den Geist herausgefunden hat, hat gewonnen. Alle anderen müssen sofort rauskommen und gamblen",
+    "openSelectItemFrame": "false",
+    "message": ""
+  },
+  {
+    "text": "Mit Zufallsrad entscheiden, welches Item als nächstes mit ins Haus genommen werden darf",
+    "openSelectItemFrame": "true",
+    "message": "Jede Minute darf ein Item gezogen werden. Siehe extra Fenster."
+  },
+  {
+    "text": "Mit Zufallsrad entscheiden, welche [items] Items nicht verwendet werden dürfen",
+    "openSelectItemFrame": "false",
+    "message": "Die folgenden Items dürfen diese Runde nicht verwendet werden:"
+  },
+  {
+    "text": "Eine Maximalanzahl [numb] an Gegenstände mit rein nehmen, dann im Haus eingesperrt",
+    "openSelectItemFrame": "false",
+    "message": "Es darf/dürfen [numb] Item(s) mit ins Haus genommen werden, dann ist man dort eingesperrt"
+  }
 ]
