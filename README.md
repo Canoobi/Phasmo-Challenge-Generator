@@ -20,8 +20,8 @@ Das Programm ermöglicht es Benutzern, ein "Chellenge-Wheel" zu drehen, um zufä
 
 ## Java-Installation
 1. Lade dir Folgendes runter und installiere es:
-   - [jre](https://javadl.oracle.com/webapps/download/AutoDL?BundleId=249550_4d245f941845490c91360409ecffb3b4) 
    - [jdk](https://www.oracle.com/de/java/technologies/downloads/#jdk22-windows)
+   - [jre](https://javadl.oracle.com/webapps/download/AutoDL?BundleId=249550_4d245f941845490c91360409ecffb3b4) 
 2. Ändere die folgenden System-Umgebungsvariablen oder füge sie hinzu:
    - JAVA_HOME &rarr; C:\Program Files\Java\jdk-22 (Installationspfad jdk)
    - PATH &rarr; C:\Program Files (x86)\Java\jre-1.8\bin (Installationspfad jre)
