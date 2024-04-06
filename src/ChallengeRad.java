@@ -9,17 +9,18 @@ import java.util.HashSet;
 import java.util.Random;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class ChallengeRad extends JFrame {
-    private String[] elements;
+    private String[][] elements;
     private Random random;
     private JLabel resultLabel;
     private static JButton spinButton;
-    public static String[] items = readElementsFromJSON("/items.json");
+    public static String[][] items = readElementsFromJSON("/items.json", "itemtype");
 
-    public ChallengeRad(String[] elements) {
+    public ChallengeRad(String[][] elements) {
         this.elements = elements;
         this.random = new Random();
 
@@ -41,6 +42,7 @@ public class ChallengeRad extends JFrame {
         JPanel wheelPanel = new JPanel();
         wheelPanel.setLayout(new GridLayout(1, 1));
         wheelPanel.setBackground(Color.GREEN);
+        //TODO set color to white and button to green/red
         resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Drücke 'Spin' um zu starten<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wheelPanel.add(resultLabel);
@@ -77,40 +79,39 @@ public class ChallengeRad extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + elements[currentIndex] + "</div></html>");
+                resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + elements[currentIndex][0] + "</div></html>");
                 currentIndex = (currentIndex + 1) % elements.length;
 
                 count++;
                 if (count >= spins) {
                     ((Timer) e.getSource()).stop();
-                    if (currentIndex == 23) {
-                        resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>Jede Minute darf ein Item gezogen werden. Siehe extra Fenster.</div></html>");
+                    if (elements[currentIndex][1].equals("true")) { // this block opens the SelectItemFrame-Window and sets the custom message
+                        setLabelText(currentIndex);
                         new SelectItemFrame();
-                    } else if (currentIndex == 24) {
+                    } else if (elements[currentIndex][0].contains("[items]")) { // 2-12 random items
                         int numberOfItems = 2 + random.nextInt(11);
-                        StringBuilder selectedItemsText = new StringBuilder("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 20px; text-align: center; color: black;'>Die folgenden Items dürfen diese Runde nicht verwendet werden:<br>");
+                        StringBuilder selectedItemsText = new StringBuilder("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 20px; text-align: center; color: black;'>" + elements[currentIndex][2] + "<br>");
                         HashSet<Integer> selectedIndexes = new HashSet<>();
                         while (selectedIndexes.size() < numberOfItems) {
                             int randomIndex = random.nextInt(items.length);
                             if (!selectedIndexes.contains(randomIndex)) {
                                 selectedIndexes.add(randomIndex);
-                                selectedItemsText.append("<div style='font-size: 18px; text-align: center;'>").append(items[randomIndex]).append("</div>");
+                                selectedItemsText.append("<div style='font-size: 18px; text-align: center;'>").append(items[randomIndex][0]).append("</div>");
                             }
                         }
                         selectedItemsText.append("</div></html>");
                         resultLabel.setText(selectedItemsText.toString());
                         setButton(true);
-                    } else if (currentIndex == 25) {
-                        int numberOfItems = random.nextInt(6);
-                        if (numberOfItems == 1) {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>Es darf 1 Item mit ins Haus genommen werden, dann ist man dort eingesperrt</div></html>");
-                            setButton(true);
+                    } else if (elements[currentIndex][0].contains("[numb]")) { // random number between 1 and 8
+                        int numberOfItems = 1 + random.nextInt(8);
+                        if (elements[currentIndex][2].isEmpty()) {
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>" + elements[currentIndex][0].replace("[numb]", String.valueOf(numberOfItems)) + "</div></html>");
                         } else {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>Es dürfen <b>" + numberOfItems + "</b> Items mit ins Haus genommen werden, dann ist man dort eingesperrt</div></html>");
-                            setButton(true);
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>" + elements[currentIndex][2].replace("[numb]", String.valueOf(numberOfItems)) + "</div></html>");
                         }
+                        setButton(true);
                     } else {
-                        resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>" + elements[currentIndex] + "</div></html>");
+                        setLabelText(currentIndex);
                         setButton(true);
                     }
                 }
@@ -119,32 +120,45 @@ public class ChallengeRad extends JFrame {
         timer.start();
     }
 
-    public static String[] readElementsFromJSON(String filename) {
+    private void setLabelText(int index) {
+        if (elements[index][2].isEmpty()) {
+            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>" + elements[index][0] + "</div></html>");
+        } else {
+            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>Die Challenge für diese Runde lautet:<br><div style='font-size: 18px; text-align: center; color: black;'>" + elements[index][2] + "</div></html>");
+        }
+    }
+
+    public static String[][] readElementsFromJSON(String filename, String varname) {
         JSONParser parser = new JSONParser();
         try (InputStream inputStream = ChallengeRad.class.getResourceAsStream("/resources" + filename)) {
             Object obj = parser.parse(new InputStreamReader(inputStream));
             JSONArray jsonArray = (JSONArray) obj;
-            String[] elements = new String[jsonArray.size()];
+            String[][] elements = new String[jsonArray.size()][3];
             for (int i = 0; i < jsonArray.size(); i++) {
-                elements[i] = (String) jsonArray.get(i);
+                JSONObject item = (JSONObject) jsonArray.get(i);
+                //JSONArray item = (JSONArray) jsonArray.get(i);
+                System.out.println(item.toString());
+                elements[i][0] = (String) item.get("text"); // Text
+                elements[i][1] = (String) item.get(varname); // Variable
+                elements[i][2] = (String) item.get("message"); // additional Text
             }
             return elements;
         } catch (IOException | ParseException e) {
             e.printStackTrace();
-            return new String[0];
+            return new String[0][0];
         }
     }
 
     public static void main(String[] args) {
-        String[] wheelElements = readElementsFromJSON("/tasks.json");
+        String[][] wheelElements = readElementsFromJSON("/tasks.json", "openSelectItemFrame");
         //String[] wheelElements = readElementsFromJSON("A:/Dokumente/Privat/PhasmoChalGenerator/PhasmoChallengeGenerator/out/production/PhasmoChallengeGenerator/resources/tasks.json");
 
         for (int i = 0; i < wheelElements.length; i++) {
-            System.out.println(i + ": " + wheelElements[i]);
+            System.out.println(i + ": " + wheelElements[i][0] + "; " + wheelElements[i][1]);
         }
         System.out.println();
         for (int i = 0; i < items.length; i++) {
-            System.out.println(i + ": " + items[i]);
+            System.out.println(i + ": " + items[i][0] + "; " + items[i][1]);
         }
         SwingUtilities.invokeLater(() -> {
             ChallengeRad wheelGUI = new ChallengeRad(wheelElements);

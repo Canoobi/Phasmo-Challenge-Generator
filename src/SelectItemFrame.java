@@ -15,8 +15,8 @@ public class SelectItemFrame extends JFrame {
     private Timer timer;
     private Random random;
     private HashSet<String> selectedItems;
-    private int waitingTime = 60;
-    public static String[] items = ChallengeRad.items;
+    private int waitingTime = 60; // set the time to wait for the next spin
+    public static String[][] items = ChallengeRad.items;
 
     public SelectItemFrame() {
         setTitle("Select Item");
@@ -114,10 +114,10 @@ public class SelectItemFrame extends JFrame {
 
     private String selectRandomItem() {
         int index = random.nextInt(items.length);
-        String selectedItem = items[index];
+        String selectedItem = items[index][0];
         while (selectedItems.contains(selectedItem)) {
             index = random.nextInt(items.length);
-            selectedItem = items[index];
+            selectedItem = items[index][0];
         }
         selectedItems.add(selectedItem);
         return selectedItem;
