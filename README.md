@@ -49,7 +49,7 @@ In der Datei ```src\resources\items.json``` sind alle im Spiel verfügbaren Item
 @Josefine (Challenges)\
 @Carlo (Challenge Generator)
 
-# ------------------------------------------------------------------
+# ---------------------------------------------
 
 # Phasmophobia Challenge Generator (English)
 Phasmo-Challenge-Generator is a program for the random selection of challenges for the game 'Phasmophobia'.
