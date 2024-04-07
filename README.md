@@ -1,5 +1,5 @@
 # Phasmophobia-Challenge-Generator (German)
-(For english-version see below)\
+(For the English version, see below)\
 Phasmo-Challenge-Generator ist ein Programm zur zufälligen Auswahl von Herausforderungen für das Spiel 'Phasmophobia'.
 
 ## Beschreibung
@@ -49,7 +49,7 @@ In der Datei ```src\resources\items.json``` sind alle im Spiel verfügbaren Item
 @Josefine (Challenges)\
 @Carlo (Challenge Generator)
 
-# ------------------------------------------------------------------
+# ---------------------------------------------
 
 # Phasmophobia Challenge Generator (English)
 Phasmo-Challenge-Generator is a program for the random selection of challenges for the game 'Phasmophobia'.
