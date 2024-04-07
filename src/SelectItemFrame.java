@@ -103,7 +103,7 @@ public class SelectItemFrame extends JFrame {
                         ((Timer) e.getSource()).stop();
                         wheelPanel.setBackground(Color.GREEN);
                         spinButton.setEnabled(true);
-                        timeRemainingLabel.setText(Integer.toString(waitingTime));
+                        timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + Integer.toString(waitingTime) + " Sekunden</div></html>");
                     } else {
                         timeLeft--;
                     }
