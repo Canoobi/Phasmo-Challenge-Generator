@@ -1,0 +1,11 @@
+{
+  "start-message": "Drücke 'Spin' zum starten!",
+  "challenge-message": "Die Challenge für diese Runde lautet:",
+  "waiting-time-for-new-item": 60,
+  "player-colors": [
+    "ROT",
+    "BLAU",
+    "GRÜN",
+    "ROSA"
+  ]
+}

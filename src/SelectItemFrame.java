@@ -15,10 +15,12 @@ public class SelectItemFrame extends JFrame {
     private Timer timer;
     private Random random;
     private HashSet<String> selectedItems;
-    private int waitingTime = 60; // set the time to wait for the next spin
-    public static String[][] items = ChallengeRad.items;
+    private String[][] items = ChallengeRad.items;
+    private int waitingTime;
 
-    public SelectItemFrame() {
+    public SelectItemFrame(long waitingTime) {
+        this.waitingTime = (int) waitingTime;
+
         setTitle("Select Item");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(600, 450);
@@ -77,7 +79,6 @@ public class SelectItemFrame extends JFrame {
 
         add(mainPanel);
     }
-
 
     private class SpinButtonListener implements ActionListener {
         @Override
