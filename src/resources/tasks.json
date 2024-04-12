@@ -80,9 +80,9 @@
     "message": ""
   },
   {
-    "text": "Hide and Seek: alle Spieler verstecken sich, einer muss suchen, beim Hunt wechselt der Sucher, wer am längsten überlebt, gewinnt",
+    "text": "Hide and Seek: alle Spieler verstecken sich, einer muss suchen, wurde einer gefunden, wechselt der Sucher, wer am längsten überlebt, gewinnt [$color$]",
     "openSelectItemFrame": "false",
-    "message": ""
+    "message": "Hide and Seek: Alle Spieler verstecken sich, einer muss suchen. Wurde ein Spieler gefunden, muss dieser suchen. Spieler [$color$] fängt an zu suchen. Wer am längsten überlebt, gewinnt!"
   },
   {
     "text": "Geräusche während des Hunts machen",
@@ -120,13 +120,13 @@
     "message": "Jede Minute darf ein Item gezogen werden. Siehe extra Fenster."
   },
   {
-    "text": "Mit Zufallsrad entscheiden, welche [items] Items nicht verwendet werden dürfen",
+    "text": "Mit Zufallsrad entscheiden, welche [$items$] Items nicht verwendet werden dürfen",
     "openSelectItemFrame": "false",
     "message": "Die folgenden Items dürfen diese Runde nicht verwendet werden:"
   },
   {
-    "text": "Eine Maximalanzahl [numb] an Gegenstände mit rein nehmen, dann im Haus eingesperrt",
+    "text": "Eine Maximalanzahl [$numb$] an Gegenstände mit rein nehmen, dann im Haus eingesperrt",
     "openSelectItemFrame": "false",
-    "message": "Es darf/dürfen [numb] Item(s) mit ins Haus genommen werden, dann ist man dort eingesperrt"
+    "message": "Es darf/dürfen [$numb$] Item(s) mit ins Haus genommen werden, dann ist man dort eingesperrt"
   }
 ]
