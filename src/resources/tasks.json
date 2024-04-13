@@ -1,132 +1,158 @@
 [
   {
     "text": "Alle Kuscheltiere in den Van bringen, bevor der Geist ermittelt wird.",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Nicht verstecken, nur wegrennen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Cursed Item zuerst nutzen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "No Sound",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Alle gehen mit Kopfkamera rein (ohne Taschenlampe), einer bleibt im Van und lotst die Spieler",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [3,4]
   },
   {
     "text": "Kerze only",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Jedes Versteck nur einmal nutzen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Nicht rennen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Nur eine Person pro Raum",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [2,3,4]
   },
   {
     "text": "Nur rückwärts laufen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Das Haus ordentlich hinterlassen - ggf. nach jedem Hunt aufräumen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Alle Ausrüstungsgegenstände vor Abfahrt zurück in den Van bringen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Alle Spieler bleiben zusammen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [2,3,4]
   },
   {
     "text": "Nicht sprechen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [2,3,4]
   },
   {
     "text": "Kein Walkie Talkie verwenden",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [2,3,4]
   },
   {
     "text": "Den Geisternamen vor/nach jedem Satz sagen - sonst Strafe",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [2,3,4]
   },
   {
     "text": "Hide and Seek: alle Spieler verstecken sich, einer muss suchen, wurde einer gefunden, wechselt der Sucher, wer am längsten überlebt, gewinnt [$color$]",
-    "openSelectItemFrame": "false",
-    "message": "Hide and Seek: Alle Spieler verstecken sich, einer muss suchen. Wurde ein Spieler gefunden, muss dieser suchen. Spieler [$color$] fängt an zu suchen. Wer am längsten überlebt, gewinnt!"
+    "openSelectItemFrame": false,
+    "message": "Hide and Seek: Alle Spieler verstecken sich, einer muss suchen. Wurde ein Spieler gefunden, muss dieser suchen. Spieler [$color$] fängt an zu suchen. Wer am längsten überlebt, gewinnt!",
+    "reqPlayers": [3,4]
   },
   {
     "text": "Geräusche während des Hunts machen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Alle Items aus dem Haus in den Van bringen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Am Anfang & Ende der Runde und nach jedem Hunt & Event einmal durch das ganze Haus rennen (jeder Raum)",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "'Big Brother': Alle Cams ins Haus. Einer geht rein und versucht alles alleine zu machen, während die anderen von draußen zusehen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [3,4]
   },
   {
     "text": "Versus-Challenge: Wer als erstes alle anderen umgebracht hat, hat gewonnen (gleiche Voraussetzungen, z.B. Anzahl Räucherstäbchen)",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [2,3,4]
   },
   {
     "text": "Versus-Challenge: Wer als erstes den Geist herausgefunden hat, hat gewonnen. Alle anderen müssen sofort rauskommen und gamblen",
-    "openSelectItemFrame": "false",
-    "message": ""
+    "openSelectItemFrame": false,
+    "message": "",
+    "reqPlayers": [2,3,4]
   },
   {
     "text": "Mit Zufallsrad entscheiden, welches Item als nächstes mit ins Haus genommen werden darf",
-    "openSelectItemFrame": "true",
-    "message": "Jede Minute darf ein Item gezogen werden. Siehe extra Fenster."
+    "openSelectItemFrame": true,
+    "message": "Jede Minute darf ein Item gezogen werden. Siehe extra Fenster.",
+    "reqPlayers": [2,3,4]
   },
   {
     "text": "Mit Zufallsrad entscheiden, welche [$items$] Items nicht verwendet werden dürfen",
-    "openSelectItemFrame": "false",
-    "message": "Die folgenden Items dürfen diese Runde nicht verwendet werden:"
+    "openSelectItemFrame": false,
+    "message": "Die folgenden Items dürfen diese Runde nicht verwendet werden:",
+    "reqPlayers": [1,2,3,4]
   },
   {
     "text": "Eine Maximalanzahl [$numb$] an Gegenstände mit rein nehmen, dann im Haus eingesperrt",
-    "openSelectItemFrame": "false",
-    "message": "Es darf/dürfen [$numb$] Item(s) mit ins Haus genommen werden, dann ist man dort eingesperrt"
+    "openSelectItemFrame": false,
+    "message": "Es darf/dürfen [$numb$] Item(s) mit ins Haus genommen werden, dann ist man dort eingesperrt",
+    "reqPlayers": [1,2,3,4]
   }
 ]

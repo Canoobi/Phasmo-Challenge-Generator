@@ -53,7 +53,7 @@ public class SelectItemFrame extends JFrame {
         timerPanel.setPreferredSize(new Dimension(600, 50));
         JLabel timerLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>Zeit bis zum nächsten Item:<br></div></html>");
         timerPanel.add(timerLabel);
-        timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + Integer.toString(waitingTime) + " Sekunden</div></html>");
+        timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + waitingTime + " Sekunden</div></html>");
         timerPanel.add(timeRemainingLabel);
 
         // Result- and Spin-Button-Panel
@@ -99,12 +99,12 @@ public class SelectItemFrame extends JFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + Integer.toString(timeLeft) + " Sekunden</div></html>");
+                    timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + timeLeft + " Sekunden</div></html>");
                     if (timeLeft == 0) {
                         ((Timer) e.getSource()).stop();
                         wheelPanel.setBackground(Color.GREEN);
                         spinButton.setEnabled(true);
-                        timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + Integer.toString(waitingTime) + " Sekunden</div></html>");
+                        timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + waitingTime + " Sekunden</div></html>");
                     } else {
                         timeLeft--;
                     }
