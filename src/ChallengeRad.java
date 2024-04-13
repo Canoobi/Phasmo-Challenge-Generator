@@ -15,12 +15,16 @@ import org.json.simple.parser.ParseException;
 
 public class ChallengeRad extends JFrame {
     private JLabel resultLabel;
+    private static JPanel buttonPanel;
     private static JButton spinButton;
 
-    private static String startMessage;
+    private static String startMessage1;
+    private static String startMessage2;
     private static String challengeMessage;
+    private static String playerNumberText;
+    private static long maxPlayerNumber;
     private Random random;
-    private int playerNum;
+    private static int playerNum;
     private static long waitingTime;
     private static String[] playerColors;
     private static String[][] wheelElements = readElementsFromJSON("/tasks.json", "openSelectItemFrame");
@@ -44,6 +48,24 @@ public class ChallengeRad extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
+        JPanel playerNumPanel = new JPanel(new GridLayout(2, 1));
+
+        JLabel playerNumLabel = new JLabel("<html><div style='font-size: 23px; text-align: center;'>" + playerNumberText + "</div></html>");
+        playerNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        playerNumPanel.add(playerNumLabel, BorderLayout.AFTER_LAST_LINE);
+
+        buttonPanel = new JPanel();
+
+        for (int i = 0; i < maxPlayerNumber; i++) {
+            JPanel buttonPanelTemp = new JPanel();
+            buttonPanel.add(buttonPanelTemp, BorderLayout.CENTER);
+            JButton button = new JButton("" + (i + 1));
+            button.setBackground(Color.WHITE);
+            button.addActionListener(new PlayerNumButtonListener());
+            buttonPanelTemp.add(button);
+        }
+        playerNumPanel.add(buttonPanel, BorderLayout.AFTER_LAST_LINE);
+
         JPanel westBlock = new JPanel();
         westBlock.setPreferredSize(new Dimension(100, 800));
         westBlock.setBackground(Color.WHITE);
@@ -55,7 +77,7 @@ public class ChallengeRad extends JFrame {
         JPanel wheelPanel = new JPanel();
         wheelPanel.setLayout(new GridLayout(1, 1));
         wheelPanel.setBackground(Color.WHITE);
-        resultLabel = new JLabel("<html><div style='font-size: 26px; text-align: center;'>" + startMessage + "<br></div></html>");
+        resultLabel = new JLabel("<html><div style='font-size: 26px; text-align: center;'>" + startMessage1 + "<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wheelPanel.add(resultLabel);
 
@@ -63,13 +85,29 @@ public class ChallengeRad extends JFrame {
         spinButton.addActionListener(new SpinButtonListener());
         spinButton.setPreferredSize(new Dimension(1200, 100));
         spinButton.setBackground(Color.GREEN);
+        setButton(false);
 
+        mainPanel.add(playerNumPanel, BorderLayout.NORTH);
         mainPanel.add(westBlock, BorderLayout.WEST);
         mainPanel.add(eastBlock, BorderLayout.EAST);
         mainPanel.add(wheelPanel, BorderLayout.CENTER);
+
         mainPanel.add(spinButton, BorderLayout.SOUTH);
 
         add(mainPanel);
+    }
+
+    public class PlayerNumButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton button = (JButton) e.getSource();
+            playerNum = Integer.parseInt(button.getText());
+            System.out.println("new Playernum: " + playerNum);
+            setAllButtons(true);
+            button.setEnabled(false);
+            button.setBackground(Color.GREEN);
+            resultLabel.setText("<html><div style='font-size: 26px; text-align: center;'>" + startMessage2 + "<br></div></html>");
+        }
     }
 
     public class SpinButtonListener implements ActionListener {
@@ -79,9 +117,42 @@ public class ChallengeRad extends JFrame {
         }
     }
 
+    public static void setAllButtons(boolean boo) {
+        setPlayerNumberButtons(boo, false);
+        setButton(boo);
+    }
+
+    public static void setAllButtonsSavePlay(boolean boo) {
+        setPlayerNumberButtons(boo, true);
+        setButton(boo);
+    }
+
+    private static void setPlayerNumberButtons(boolean boo, boolean savePlayerNumbButton) {
+
+        for (int i = 0; i < maxPlayerNumber; i++) {
+            JPanel panel = (JPanel) buttonPanel.getComponent(i);
+            JButton button = (JButton) panel.getComponent(0);
+            if ((Integer.parseInt(button.getText()) == playerNum) && savePlayerNumbButton) {
+                continue;
+            } else {
+                button.setEnabled(boo);
+                button.setBackground(Color.WHITE);
+            }
+        }
+    }
+
+    private static void setButton(boolean boo) {
+        spinButton.setEnabled(boo);
+        if (boo) {
+            spinButton.setBackground(Color.GREEN);
+        } else {
+            spinButton.setBackground(Color.RED);
+        }
+    }
+
     private void spinWheel() {
-        setButton(false);
-        int spins = 20 + random.nextInt(50); // Number of spins
+        setAllButtonsSavePlay(false);
+        int spins = 20 + random.nextInt(wheelElements.length); // Number of spins
         int delay = 100; // Delay between each spin
 
         Timer timer = new Timer(delay, new ActionListener() {
@@ -92,7 +163,7 @@ public class ChallengeRad extends JFrame {
                 if (wheelElements[currentIndex][2].isEmpty()) {
                     resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + wheelElements[currentIndex][0] + "</div></html>");
                 } else {
-                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + wheelElements[currentIndex][0] + "</div></html>");
+                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + wheelElements[currentIndex][2] + "</div></html>");
                 }
 
                 currentIndex = (currentIndex + 1) % wheelElements.length;
@@ -116,7 +187,7 @@ public class ChallengeRad extends JFrame {
                         }
                         selectedItemsText.append("</div></html>");
                         resultLabel.setText(selectedItemsText.toString());
-                        setButton(true);
+                        setAllButtons(true);
                     } else if (wheelElements[currentIndex][0].contains("[$numb$]")) { // random number between 1 and 8
                         int numberOfItems = 1 + random.nextInt(8);
                         if (wheelElements[currentIndex][2].contains("[$numb$]")) {
@@ -124,32 +195,24 @@ public class ChallengeRad extends JFrame {
                         } else {
                             resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex][0].replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
                         }
-                        setButton(true);
+                        setAllButtonsSavePlay(true);
                     } else if (wheelElements[currentIndex][0].contains("[$color$]")) {
                         int rand = random.nextInt(playerColors.length + 1); //TODO edit this when player number is implemented
+                        //TODO max-player-number mod player-colors
                         if (wheelElements[currentIndex][2].contains("[$color$]")) {
                             resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex][2].replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
                         } else {
                             resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex][0].replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
                         }
-                        setButton(true);
+                        setAllButtonsSavePlay(true);
                     } else {
                         setLabelText(currentIndex);
-                        setButton(true);
+                        setAllButtonsSavePlay(true);
                     }
                 }
             }
         });
         timer.start();
-    }
-
-    public static void setButton(boolean boo) {
-        spinButton.setEnabled(boo);
-        if (boo) {
-            spinButton.setBackground(Color.GREEN);
-        } else {
-            spinButton.setBackground(Color.RED);
-        }
     }
 
     private void setLabelText(int index) {
@@ -187,8 +250,11 @@ public class ChallengeRad extends JFrame {
 
             JSONObject jsonObject = (JSONObject) obj;
 
-            startMessage = jsonObject.get("start-message").toString();
+            startMessage1 = jsonObject.get("start-message-1").toString();
+            startMessage2 = jsonObject.get("start-message-2").toString();
             challengeMessage = jsonObject.get("challenge-message").toString();
+            playerNumberText = jsonObject.get("player-number").toString();
+            maxPlayerNumber = (long) jsonObject.get("max-player-number");
             waitingTime = (long) jsonObject.get("waiting-time-for-new-item");
 
             JSONArray jsonArray = (JSONArray) jsonObject.get("player-colors");
@@ -203,11 +269,14 @@ public class ChallengeRad extends JFrame {
 
     public static void main(String[] args) {
         initSettingsFromJSON();
+        System.out.println(wheelElements.length);
 
+        //TODO eigene Klasse für Wheel-elemente
         //TODO ask for player number at the beginning
         //TODO make challenges bound to a specific player number
+        //TODO update README.md
 
-        System.out.println("Start-message: " + startMessage);
+        System.out.println("Start-message: " + startMessage1);
         System.out.println("challenge-message: " + challengeMessage);
         System.out.println("waiting-time: " + waitingTime);
         System.out.println();

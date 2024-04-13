@@ -39,7 +39,7 @@ public class SelectItemFrame extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                ChallengeRad.setButton(true);
+                ChallengeRad.setAllButtonsSavePlay(true);
             }
         });
     }
