@@ -24,15 +24,16 @@ Das Programm ermöglicht es Benutzern, ein "Chellenge-Wheel" zu drehen, um zufä
 Um eine eigene Version des Phasmo-Challenge-Generators zu erstellen, befolge die folgenden Schritte:
 1. Klone dir das aktuelle Repository.
 2. Öffne das lokale Repository mit IntelliJ.
-3. Füge in die Datei ```src\resources\tasks.json``` deine Aufgaben nach dem folgenden Muster ein:
-   - ```{"text": "%Deine Aufgabe hier einfügen%", "openSelectItemFrame": "false", "message": "%Optional eine abweichende Ausgabenachricht einfügen%" }``` für eine normale Aufgabe ohne auszuführende Funktion.
-   - ```{"text": "%Deine Aufgabe hier einfügen%", "openSelectItemFrame": "true", "message": "%Optional eine abweichende Ausgabenachricht einfügen%" }``` für eine Aufgabe, bei der sich das Item-Auswahl-Fenster öffnen soll (beachte dabei den Timer und, dass jedes Item nur einmal ausgewählt werden kann).
-   - ```{"text": "%Deine [$items$] Aufgabe hier einfügen%", "openSelectItemFrame": "false", "message": "%ZWINGEND eine Ausgabenachricht einfügen%" }``` für eine Aufgabe bei der 2 bis 12 zufällige Items an das Ende der Aufgabe angehangen werden sollen. Beachte, dass ```[$items$]``` in der Aufgabe vorkommen muss!
-   - ```{"text": "%Deine [$numb$] Aufgabe einfügen%", "openSelectItemFrame": "false", "message": "%Optional eine abweichende Ausgabenachricht einfügen%" }``` für eine Aufgabe in der eine zufällige Zahl zwischen 1 und 8 vorkommen soll. Beachte, dass ```[$numb$]``` in der Aufgabe vorkommen muss! Soll eine abweichende Ausgabenachricht genutzt werden, muss darin ebenfalls ```[$numb$]``` vorkommen.
-   - ```{"text": "%Deine [$color$] Aufgabe einfügen%", "openSelectItemFrame": "false", "message": "%Optional eine abweichende Ausgabenachricht einfügen%" }``` für eine Aufgabe in der eine zufällige Spielerfarbe vorkommen soll. Beachte, dass ```[$color$]``` in der Aufgabe vorkommen muss! Soll eine abweichende Ausgabenachricht genutzt werden, muss darin ebenfalls ```[$color$]``` vorkommen.
-4. Erstelle eine JAR-Datei als Artifact. Beachte, dass die 'json-simple'-Library inkludiert werden muss.
-5. Installiere und starte Launch4j. Wähle eine Output-Datei und die JAR-Datei aus und erstelle die EXE-Datei.
-6. Herzlichen Glückwunsch, du hast deine eigene Version des Phasmo-Challenge-Generators erstellt. Zur Verwendung fahre bei 'Verwendung' ab Punkt 2 fort.
+3. Überprüfe in der Datei ```src\resources\settings.json```, ob alle Einstellungen für dich passen. Falls nicht, passe sie an.
+4. Füge in die Datei ```src\resources\tasks.json``` deine Aufgaben nach dem folgenden Muster ein:
+   - ```{"text": "%Deine Aufgabe hier einfügen%", "openSelectItemFrame": "false", "message": "%Optional eine abweichende Ausgabenachricht einfügen%", "reqPlayers": [%füge die Spieleranzahlen hinzu, die diese Aufgabe bekommen können (als int; kommasepariert)%]}``` für eine normale Aufgabe ohne auszuführende Funktion.
+   - ```{"text": "%Deine Aufgabe hier einfügen%", "openSelectItemFrame": "true", "message": "%Optional eine abweichende Ausgabenachricht einfügen%", "reqPlayers": [%füge die Spieleranzahlen hinzu, die diese Aufgabe bekommen können (als int; kommasepariert)%]}``` für eine Aufgabe, bei der sich das Item-Auswahl-Fenster öffnen soll (beachte dabei den Timer und, dass jedes Item nur einmal ausgewählt werden kann).
+   - ```{"text": "%Deine [$items$] Aufgabe hier einfügen%", "openSelectItemFrame": "false", "message": "%ZWINGEND eine Ausgabenachricht einfügen%", "reqPlayers": [%füge die Spieleranzahlen hinzu, die diese Aufgabe bekommen können (als int; kommasepariert)%]}``` für eine Aufgabe bei der 2 bis 12 zufällige Items an das Ende der Aufgabe angehangen werden sollen. Beachte, dass ```[$items$]``` in der Aufgabe vorkommen muss!
+   - ```{"text": "%Deine [$numb$] Aufgabe einfügen%", "openSelectItemFrame": "false", "message": "%Optional eine abweichende Ausgabenachricht einfügen%", "reqPlayers": [%füge die Spieleranzahlen hinzu, die diese Aufgabe bekommen können (als int; kommasepariert)%]}``` für eine Aufgabe in der eine zufällige Zahl zwischen 1 und 8 vorkommen soll. Beachte, dass ```[$numb$]``` in der Aufgabe vorkommen muss! Soll eine abweichende Ausgabenachricht genutzt werden, muss darin ebenfalls ```[$numb$]``` vorkommen.
+   - ```{"text": "%Deine [$color$] Aufgabe einfügen%", "openSelectItemFrame": "false", "message": "%Optional eine abweichende Ausgabenachricht einfügen%", "reqPlayers": [%füge die Spieleranzahlen hinzu, die diese Aufgabe bekommen können (als int; kommasepariert)%]}``` für eine Aufgabe in der eine zufällige Spielerfarbe vorkommen soll. Beachte, dass ```[$color$]``` in der Aufgabe vorkommen muss! Soll eine abweichende Ausgabenachricht genutzt werden, muss darin ebenfalls ```[$color$]``` vorkommen.
+5. Erstelle eine JAR-Datei als Artifact. Beachte, dass die 'json-simple'-Library inkludiert werden muss.
+6. Installiere und starte Launch4j. Wähle eine Output-Datei und die JAR-Datei aus und erstelle die EXE-Datei.
+7. Herzlichen Glückwunsch, du hast deine eigene Version des Phasmo-Challenge-Generators erstellt. Zur Verwendung fahre bei 'Verwendung' ab Punkt 2 fort.
 
 ## Java-Installation
 1. Lade dir Folgendes runter und installiere es:
@@ -77,15 +78,16 @@ The program allows users to spin a "Challenge Wheel" to receive random challenge
 To create your own version of the Phasmo Challenge Generator, follow these steps:
 1. Clone the current repository.
 2. Open the local repository with IntelliJ.
-3. Add your tasks to the file ```src\resources\tasks.json``` as follows:
-   - ```{"text": "%Insert your task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%"}``` for a normal task without any functionality.
-   - ```{"text": "%Insert your task here%", "openSelectItemFrame": "true", "message": "%Optionally insert a different output message%"}``` for a task where the item selection frame should open (note the timer and that each item can only be selected once).
-   - ```{"text": "%Insert your [$items$] task here%", "openSelectItemFrame": "false", "message": "%MANDATORY: Insert an output message here%"}``` for a task where 2 to 12 random items should be appended to the end of the task. Note that ```[$items$]``` must be present in the task!
-   - ```{"text": "%Insert your [$numb$] task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%"}``` for a task where a random number between 1 and 8 should be included. Note that ```[$numb$]``` must be present in the task! If a different output message is to be used, ```[$numb$]``` must also be included in it.
-   - ```{"text": "%Insert your [$color$] task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%"}``` for a task where a random player color should be included. Note that ```[$color$]``` must be present in the task! If a different output message is to be used, ```[$color$]``` must also be included in it.
-4. Create a JAR file as an artifact. Note that the 'json-simple' library must be included.
-5. Install and start Launch4j. Choose an output file and the JAR file and create the EXE file.
-6. Congratulations, you have created your own version of the Phasmo Challenge Generator. To use it, continue from point 2 under 'Usage'.
+3. Check in the file ```src\resources\settings.json``` whether all settings are correct for you. If not, adjust them.
+4. Add your tasks to the file ```src\resources\tasks.json``` as follows:
+   - ```{"text": "%Insert your task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%", "reqPlayers": [%add the number of players who can receive this task (as int; comma separated)%]}``` for a normal task without any functionality.
+   - ```{"text": "%Insert your task here%", "openSelectItemFrame": "true", "message": "%Optionally insert a different output message%", "reqPlayers": [%add the number of players who can receive this task (as int; comma separated)%]}``` for a task where the item selection frame should open (note the timer and that each item can only be selected once).
+   - ```{"text": "%Insert your [$items$] task here%", "openSelectItemFrame": "false", "message": "%MANDATORY: Insert an output message here%", "reqPlayers": [%add the number of players who can receive this task (as int; comma separated)%]}``` for a task where 2 to 12 random items should be appended to the end of the task. Note that ```[$items$]``` must be present in the task!
+   - ```{"text": "%Insert your [$numb$] task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%", "reqPlayers": [%add the number of players who can receive this task (as int; comma separated)%]}``` for a task where a random number between 1 and 8 should be included. Note that ```[$numb$]``` must be present in the task! If a different output message is to be used, ```[$numb$]``` must also be included in it.
+   - ```{"text": "%Insert your [$color$] task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%", "reqPlayers": [%add the number of players who can receive this task (as int; comma separated)%]}``` for a task where a random player color should be included. Note that ```[$color$]``` must be present in the task! If a different output message is to be used, ```[$color$]``` must also be included in it.
+5. Create a JAR file as an artifact. Note that the 'json-simple' library must be included.
+6. Install and start Launch4j. Choose an output file and the JAR file and create the EXE file.
+7. Congratulations, you have created your own version of the Phasmo Challenge Generator. To use it, continue from point 2 under 'Usage'.
 
 ## Java Installation
 1. Download and install the following:
