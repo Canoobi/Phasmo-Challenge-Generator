@@ -53,6 +53,7 @@ public class ChallengeRad extends JFrame {
 
         JLabel playerNumLabel = new JLabel("<html><div style='font-size: 23px; text-align: center;'>" + playerNumberText + "</div></html>");
         playerNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        playerNumPanel.setFont(new Font("Arial", Font.BOLD, 35));
         playerNumPanel.add(playerNumLabel, BorderLayout.AFTER_LAST_LINE);
 
         buttonPanel = new JPanel();
@@ -63,6 +64,7 @@ public class ChallengeRad extends JFrame {
             JButton button = new JButton("" + (i + 1));
             button.setBackground(Color.WHITE);
             button.addActionListener(new PlayerNumButtonListener());
+            button.setFont(new Font("Arial", Font.BOLD, 25));
             buttonPanelTemp.add(button);
         }
         playerNumPanel.add(buttonPanel, BorderLayout.AFTER_LAST_LINE);
@@ -85,6 +87,7 @@ public class ChallengeRad extends JFrame {
         spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Spin<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
         spinButton.setPreferredSize(new Dimension(1200, 100));
+        spinButton.setFont(new Font("Arial", Font.BOLD, 22));
         spinButton.setBackground(Color.GREEN);
         setButton(false);
 
@@ -92,7 +95,6 @@ public class ChallengeRad extends JFrame {
         mainPanel.add(westBlock, BorderLayout.WEST);
         mainPanel.add(eastBlock, BorderLayout.EAST);
         mainPanel.add(wheelPanel, BorderLayout.CENTER);
-
         mainPanel.add(spinButton, BorderLayout.SOUTH);
 
         add(mainPanel);
