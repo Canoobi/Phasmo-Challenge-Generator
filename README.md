@@ -3,7 +3,7 @@
 Phasmo-Challenge-Generator ist ein Programm zur zufälligen Auswahl von Herausforderungen für das Spiel 'Phasmophobia'.
 
 ## Beschreibung
-Das Programm ermöglicht es Benutzern, ein "Chellenge-Wheel" zu drehen, um zufällige Herausforderungen zu erhalten, die sie während des Spiels erfüllen müssen. Die Herausforderungen werden aus einer JSON-Datei geladen, die die verschiedenen Aufgaben enthält
+Das Programm ermöglicht es Benutzern, ein "Challenge-Wheel" zu drehen, um zufällige Herausforderungen zu erhalten, die sie während des Spiels erfüllen müssen. Die Herausforderungen werden aus einer JSON-Datei geladen, die die verschiedenen Aufgaben enthält
 
 ## Funktionalitäten
 - Drehen des Challenge Wheels, um eine zufällige Herausforderung zu erhalten.
