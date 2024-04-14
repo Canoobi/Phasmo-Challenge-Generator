@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Random;
 
 import org.json.simple.JSONArray;
@@ -27,8 +28,8 @@ public class ChallengeRad extends JFrame {
     private static int playerNum;
     private static long waitingTime;
     private static String[] playerColors;
-    private static WheelElement[] wheelElements = readElementsFromJSON("/tasks.json");
-    public static String[][] items; // = readElementsFromJSON("/items.json", "itemtype");
+    private static final WheelElement[] wheelElements = readElementsFromJSON("/tasks.json");
+    public static String[][] items;
 
     public ChallengeRad() {
         this.random = new Random();
@@ -40,7 +41,7 @@ public class ChallengeRad extends JFrame {
 
         createComponents();
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/icon.png"));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/icon.png")));
         setIconImage(icon.getImage());
     }
 
@@ -102,7 +103,7 @@ public class ChallengeRad extends JFrame {
         public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
             playerNum = Integer.parseInt(button.getText());
-            System.out.println("new Playernum: " + playerNum);
+            System.out.println("new playerNum: " + playerNum);
             setAllButtons(true);
             button.setEnabled(false);
             button.setBackground(Color.GREEN);
@@ -131,10 +132,7 @@ public class ChallengeRad extends JFrame {
         for (int i = 0; i < maxPlayerNumber; i++) {
             JPanel panel = (JPanel) buttonPanel.getComponent(i);
             JButton button = (JButton) panel.getComponent(0);
-            System.out.println(button.getText() + "  " + playerNum);
-            if ((Integer.parseInt(button.getText()) == playerNum) && savePlayerNumbButton) {
-                continue;
-            } else {
+            if ((Integer.parseInt(button.getText()) != playerNum) || !savePlayerNumbButton) {
                 button.setEnabled(boo);
                 button.setBackground(Color.WHITE);
             }
@@ -152,18 +150,18 @@ public class ChallengeRad extends JFrame {
 
     private void spinWheel() {
         setAllButtonsSavePlay(false);
-        int spins = 23;//20 + random.nextInt(wheelElements.length); // Number of spins
-        int delay = 100; // Delay between each spin
+        int spins = 20 + random.nextInt(wheelElements.length);
+        int delay = 100;
 
         Timer timer = new Timer(delay, new ActionListener() {
             int count = 0;
             int currentIndex = 0;
 
             public void actionPerformed(ActionEvent e) {
-                if (wheelElements[currentIndex].getMessage().isEmpty()) {
-                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + wheelElements[currentIndex].getText() + "</div></html>");
+                if (wheelElements[currentIndex].message().isEmpty()) {
+                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + wheelElements[currentIndex].text() + "</div></html>");
                 } else {
-                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + wheelElements[currentIndex].getMessage() + "</div></html>");
+                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + wheelElements[currentIndex].message() + "</div></html>");
                 }
 
                 currentIndex = (currentIndex + 1) % wheelElements.length;
@@ -171,12 +169,12 @@ public class ChallengeRad extends JFrame {
                 count++;
                 if (count >= spins && wheelElements[currentIndex].containsRightPlayerNum(playerNum)) {
                     ((Timer) e.getSource()).stop();
-                    if (wheelElements[currentIndex].getOpenSelectItemFrame()) { // this block opens the SelectItemFrame-Window and sets the custom message
+                    if (wheelElements[currentIndex].openSelectItemFrame()) { // this block opens the SelectItemFrame-Window and sets the custom message
                         setLabelText(currentIndex);
                         new SelectItemFrame(waitingTime);
-                    } else if (wheelElements[currentIndex].getText().contains("[$items$]")) { // 2-12 random items
+                    } else if (wheelElements[currentIndex].text().contains("[$items$]")) { // 2-12 random items
                         int numberOfItems = 2 + random.nextInt(11);
-                        StringBuilder selectedItemsText = new StringBuilder("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 20px; text-align: center; color: black;'>" + wheelElements[currentIndex].getMessage() + "<br>");
+                        StringBuilder selectedItemsText = new StringBuilder("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 20px; text-align: center; color: black;'>" + wheelElements[currentIndex].message() + "<br>");
                         HashSet<Integer> selectedIndexes = new HashSet<>();
                         while (selectedIndexes.size() < numberOfItems) {
                             int randomIndex = random.nextInt(items.length);
@@ -188,21 +186,25 @@ public class ChallengeRad extends JFrame {
                         selectedItemsText.append("</div></html>");
                         resultLabel.setText(selectedItemsText.toString());
                         setAllButtonsSavePlay(true);
-                    } else if (wheelElements[currentIndex].getText().contains("[$numb$]")) { // random number between 1 and 8
+                    } else if (wheelElements[currentIndex].text().contains("[$numb$]")) { // random number between 1 and 8
                         int numberOfItems = 1 + random.nextInt(8);
-                        if (wheelElements[currentIndex].getMessage().contains("[$numb$]")) {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].getMessage().replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
+                        if (wheelElements[currentIndex].message().contains("[$numb$]")) {
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].message().replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
                         } else {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].getText().replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].text().replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
                         }
                         setAllButtonsSavePlay(true);
-                    } else if (wheelElements[currentIndex].getText().contains("[$color$]")) {
-                        int rand = random.nextInt(playerColors.length + 1); //TODO edit this when player number is implemented
-                        //TODO max-player-number mod player-colors
-                        if (wheelElements[currentIndex].getMessage().contains("[$color$]")) {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].getMessage().replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
+                    } else if (wheelElements[currentIndex].text().contains("[$color$]")) {
+                        int num = playerColors.length;
+                        if (playerNum < num) {
+                            num = playerNum;
+                        }
+                        int rand = random.nextInt(num); //TODO edit this when player number is implemented
+                        //System.out.println("playNum: " + playerNum + " colors: " + playerColors.length + " num: " + num + " rand: " + rand);
+                        if (wheelElements[currentIndex].message().contains("[$color$]")) {
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].message().replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
                         } else {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].getText().replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].text().replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
                         }
                         setAllButtonsSavePlay(true);
                     } else {
@@ -216,10 +218,10 @@ public class ChallengeRad extends JFrame {
     }
 
     private void setLabelText(int index) {
-        if (wheelElements[index].getMessage().isEmpty()) {
-            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[index].getText() + "</div></html>");
+        if (wheelElements[index].message().isEmpty()) {
+            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[index].text() + "</div></html>");
         } else {
-            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[index].getMessage() + "</div></html>");
+            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[index].message() + "</div></html>");
         }
     }
 
@@ -300,7 +302,7 @@ public class ChallengeRad extends JFrame {
         System.out.println("waiting-time: " + waitingTime);
         System.out.println();
         for (int i = 0; i < wheelElements.length; i++) {
-            System.out.println(i + ": " + wheelElements[i].getText() + "; " + wheelElements[i].getOpenSelectItemFrame());
+            System.out.println(i + ": " + wheelElements[i].text() + "; " + wheelElements[i].openSelectItemFrame());
         }
         System.out.println();
         for (int i = 0; i < items.length; i++) {

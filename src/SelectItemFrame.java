@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Random;
 
 public class SelectItemFrame extends JFrame {
@@ -12,11 +13,10 @@ public class SelectItemFrame extends JFrame {
     private JButton spinButton;
     private JPanel wheelPanel;
     private JLabel timeRemainingLabel;
-    private Timer timer;
     private Random random;
     private HashSet<String> selectedItems;
-    private String[][] items = ChallengeRad.items;
-    private int waitingTime;
+    private final String[][] items = ChallengeRad.items;
+    private final int waitingTime;
 
     public SelectItemFrame(long waitingTime) {
         this.waitingTime = (int) waitingTime;
@@ -31,7 +31,7 @@ public class SelectItemFrame extends JFrame {
 
         createComponents();
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/icon.png"));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/icon.png")));
         setIconImage(icon.getImage());
 
         setVisible(true);
@@ -94,7 +94,7 @@ public class SelectItemFrame extends JFrame {
             spinButton.setEnabled(false);
         } else {
             spinButton.setEnabled(false);
-            timer = new Timer(1000, new ActionListener() {
+            Timer timer = new Timer(1000, new ActionListener() {
                 int timeLeft = waitingTime - 1;
 
                 @Override
