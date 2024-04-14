@@ -1,102 +1,102 @@
 [
   {
     "text": "Crucifix",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "D.O.T.S. Projector",
-    "itemtype": "starter",
+    "itemType": "starter",
     "message": ""
   },
   {
     "text": "EMF Reader",
-    "itemtype": "starter",
+    "itemType": "starter",
     "message": ""
   },
   {
     "text": "Firelight",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Flashlight",
-    "itemtype": "starter",
+    "itemType": "starter",
     "message": ""
   },
   {
     "text": "Ghost Writing Book",
-    "itemtype": "starter",
+    "itemType": "starter",
     "message": ""
   },
   {
     "text": "Head Gear",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Igniter",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Incense",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Motion Sensor",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Parabolic Microphone",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Photo Camera",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Salt",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Sanity Medication",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Sound Sensor",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "Spirit Box",
-    "itemtype": "starter",
+    "itemType": "starter",
     "message": ""
   },
   {
     "text": "Thermometer",
-    "itemtype": "starter",
+    "itemType": "starter",
     "message": ""
   },
   {
     "text": "Tripod",
-    "itemtype": "optional",
+    "itemType": "optional",
     "message": ""
   },
   {
     "text": "UV Light",
-    "itemtype": "starter",
+    "itemType": "starter",
     "message": ""
   },
   {
     "text": "Video Camera",
-    "itemtype": "starter",
+    "itemType": "starter",
     "message": ""
   }
 ]

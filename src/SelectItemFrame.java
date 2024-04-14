@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Random;
 
 public class SelectItemFrame extends JFrame {
@@ -12,11 +13,10 @@ public class SelectItemFrame extends JFrame {
     private JButton spinButton;
     private JPanel wheelPanel;
     private JLabel timeRemainingLabel;
-    private Timer timer;
     private Random random;
     private HashSet<String> selectedItems;
-    private String[][] items = ChallengeRad.items;
-    private int waitingTime;
+    private final String[][] items = ChallengeRad.items;
+    private final int waitingTime;
 
     public SelectItemFrame(long waitingTime) {
         this.waitingTime = (int) waitingTime;
@@ -31,7 +31,7 @@ public class SelectItemFrame extends JFrame {
 
         createComponents();
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/icon.png"));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/icon.png")));
         setIconImage(icon.getImage());
 
         setVisible(true);
@@ -39,7 +39,7 @@ public class SelectItemFrame extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                ChallengeRad.setButton(true);
+                ChallengeRad.setAllButtonsSavePlay(true);
             }
         });
     }
@@ -53,7 +53,7 @@ public class SelectItemFrame extends JFrame {
         timerPanel.setPreferredSize(new Dimension(600, 50));
         JLabel timerLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>Zeit bis zum nächsten Item:<br></div></html>");
         timerPanel.add(timerLabel);
-        timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + Integer.toString(waitingTime) + " Sekunden</div></html>");
+        timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + waitingTime + " Sekunden</div></html>");
         timerPanel.add(timeRemainingLabel);
 
         // Result- and Spin-Button-Panel
@@ -94,17 +94,17 @@ public class SelectItemFrame extends JFrame {
             spinButton.setEnabled(false);
         } else {
             spinButton.setEnabled(false);
-            timer = new Timer(1000, new ActionListener() {
+            Timer timer = new Timer(1000, new ActionListener() {
                 int timeLeft = waitingTime - 1;
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + Integer.toString(timeLeft) + " Sekunden</div></html>");
+                    timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + timeLeft + " Sekunden</div></html>");
                     if (timeLeft == 0) {
                         ((Timer) e.getSource()).stop();
                         wheelPanel.setBackground(Color.GREEN);
                         spinButton.setEnabled(true);
-                        timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + Integer.toString(waitingTime) + " Sekunden</div></html>");
+                        timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + waitingTime + " Sekunden</div></html>");
                     } else {
                         timeLeft--;
                     }
