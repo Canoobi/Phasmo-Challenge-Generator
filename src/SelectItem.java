@@ -8,17 +8,17 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Random;
 
-public class SelectItemFrame extends JFrame {
+public class SelectItem extends JFrame {
     private JLabel resultLabel;
     private JButton spinButton;
     private JPanel wheelPanel;
     private JLabel timeRemainingLabel;
     private Random random;
     private HashSet<String> selectedItems;
-    private final String[][] items = ChallengeRad.items;
+    private final String[][] items = SelectChallenge.getItems();
     private final int waitingTime;
 
-    public SelectItemFrame(long waitingTime) {
+    public SelectItem(long waitingTime) {
         this.waitingTime = (int) waitingTime;
 
         setTitle("Select Item");
@@ -39,7 +39,7 @@ public class SelectItemFrame extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                ChallengeRad.setAllButtonsSavePlay(true);
+                SelectChallenge.setAllButtonsSavePlay(true);
             }
         });
     }

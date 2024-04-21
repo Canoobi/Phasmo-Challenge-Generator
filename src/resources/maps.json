@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Tanglewood Street House",
+    "size": "small",
+    "message": ""
+  },
+  {
+    "name": "Edgefield Street House",
+    "size": "small",
+    "message": ""
+  },
+  {
+    "name": "Willow Street House",
+    "size": "small",
+    "message": ""
+  },
+  {
+    "name": "Ridgeview Road House",
+    "size": "small",
+    "message": ""
+  },
+  {
+    "name": "Grafton Farmhouse",
+    "size": "small",
+    "message": ""
+  },
+  {
+    "name": "Bleadsdale Farmhouse",
+    "size": "small",
+    "message": ""
+  },
+  {
+    "name": "Camp Woodwind",
+    "size": "small",
+    "message": ""
+  },
+  {
+    "name": "Prison",
+    "size": "medium",
+    "message": ""
+  },
+  {
+    "name": "Maple Lodge Campsite",
+    "size": "medium",
+    "message": ""
+  },
+  {
+    "name": "Sunny Meadows Mental Institution",
+    "size": "big",
+    "message": ""
+  },
+  {
+    "name": "Brownstone High School",
+    "size": "big",
+    "message": ""
+  }
+]
