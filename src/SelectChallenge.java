@@ -19,7 +19,6 @@ public class SelectChallenge extends JFrame {
     private static JPanel buttonPanel;
     private static JButton spinButton;
     private static JButton mapButton;
-
     private static String startMessage1;
     private static String startMessage2;
     private static String challengeMessage;
@@ -30,7 +29,7 @@ public class SelectChallenge extends JFrame {
     private static long waitingTime;
     private static String[] playerColors;
     private static final WheelElement[] wheelElements = readElementsFromJSON("/tasks.json");
-    private static String[][] items;
+    private static Item[] items;
     private static String[][] maps;
 
     public SelectChallenge() {
@@ -42,12 +41,12 @@ public class SelectChallenge extends JFrame {
 
         System.out.println(wheelElements.length);
         System.out.println("start-message: " + startMessage1 + "\nchallenge-message: " + challengeMessage + "\nwaiting-time: " + waitingTime + "\n");
-                for (int i = 0; i < wheelElements.length; i++) {
+        for (int i = 0; i < wheelElements.length; i++) {
             System.out.println(i + ": " + wheelElements[i].text() + "; " + wheelElements[i].openSelectItemFrame());
         }
         System.out.println();
         for (int i = 0; i < items.length; i++) {
-            System.out.println(i + ": " + items[i][0] + "; " + items[i][1]);
+            System.out.println(i + ": " + items[i].getName() + "; " + items[i].getItemType());
         }
         System.out.println();
         for (int i = 0; i < maps.length; i++) {
@@ -56,7 +55,7 @@ public class SelectChallenge extends JFrame {
 
         setTitle("Challenge-Wheel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 900);
+        setSize(1200, 1200);
         setLocationRelativeTo(null);
 
         createComponents();
@@ -65,12 +64,16 @@ public class SelectChallenge extends JFrame {
         setIconImage(icon.getImage());
     }
 
-    public static String[][] getItems() {
+    public static Item[] getItems() {
         return items;
     }
 
     public static String[][] getMaps() {
         return maps;
+    }
+
+    public static String getStartMessage2() {
+        return startMessage2;
     }
 
     private void createComponents() {
@@ -228,10 +231,10 @@ public class SelectChallenge extends JFrame {
                 count++;
                 if (count >= spins && wheelElements[currentIndex].containsRightPlayerNum(playerNum)) {
                     ((Timer) e.getSource()).stop();
-                    if (wheelElements[currentIndex].openSelectItemFrame()) { // this block opens the SelectItemFrame-Window and sets the custom message
+                    if (wheelElements[currentIndex].openSelectItemFrame()) {
                         setLabelText(currentIndex);
                         new SelectItem(waitingTime);
-                    } else if (wheelElements[currentIndex].text().contains("[$items$]")) { // 2-12 random items
+                    } else if (wheelElements[currentIndex].text().contains("[$items$]")) {
                         int numberOfItems = 2 + random.nextInt(11);
                         StringBuilder selectedItemsText = new StringBuilder("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 20px; text-align: center; color: black;'>" + wheelElements[currentIndex].message() + "<br>");
                         HashSet<Integer> selectedIndexes = new HashSet<>();
@@ -239,13 +242,16 @@ public class SelectChallenge extends JFrame {
                             int randomIndex = random.nextInt(items.length);
                             if (!selectedIndexes.contains(randomIndex)) {
                                 selectedIndexes.add(randomIndex);
-                                selectedItemsText.append("<div style='font-size: 18px; text-align: center;'>").append(items[randomIndex][0]).append("</div>");
+                                String itemName = items[randomIndex].getName();
+                                String itemIcon = items[randomIndex].getImagePath();
+                                selectedItemsText.append("<div style='font-size: 18px; text-align: center;'><img src='").append(SelectChallenge.class.getResource(itemIcon)).append("'width='50' height='50'/> ").append(itemName).append("</div>");
+                                System.out.println(selectedItemsText);
                             }
                         }
                         selectedItemsText.append("</div></html>");
                         resultLabel.setText(selectedItemsText.toString());
                         setAllButtonsSavePlay(true);
-                    } else if (wheelElements[currentIndex].text().contains("[$numb$]")) { // random number between 1 and 8
+                    } else if (wheelElements[currentIndex].text().contains("[$numb$]")) {
                         int numberOfItems = 1 + random.nextInt(8);
                         if (wheelElements[currentIndex].message().contains("[$numb$]")) {
                             resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].message().replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
@@ -258,8 +264,7 @@ public class SelectChallenge extends JFrame {
                         if (playerNum < num) {
                             num = playerNum;
                         }
-                        int rand = random.nextInt(num); //TODO edit this when player number is implemented
-                        //System.out.println("playNum: " + playerNum + " colors: " + playerColors.length + " num: " + num + " rand: " + rand);
+                        int rand = random.nextInt(num);
                         if (wheelElements[currentIndex].message().contains("[$color$]")) {
                             resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].message().replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
                         } else {
@@ -284,17 +289,15 @@ public class SelectChallenge extends JFrame {
         }
     }
 
-    public static void getItemsFromJSON() {
+    private void getItemsFromJSON() {
         JSONParser parser = new JSONParser();
         try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/resources/items.json")) {
             Object obj = parser.parse(new InputStreamReader(inputStream));
             JSONArray jsonArray = (JSONArray) obj;
-            items = new String[jsonArray.size()][3];
+            items = new Item[jsonArray.size()];
             for (int i = 0; i < jsonArray.size(); i++) {
                 JSONObject item = (JSONObject) jsonArray.get(i);
-                items[i][0] = (String) item.get("text");
-                items[i][1] = (String) item.get("itemType");
-                items[i][2] = (String) item.get("message");
+                items[i] = new Item((String) item.get("text"), (String) item.get("itemType"), (String) item.get("imagePath"), (String) item.get("message"));
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();

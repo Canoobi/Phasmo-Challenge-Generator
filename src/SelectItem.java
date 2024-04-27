@@ -10,13 +10,15 @@ import java.util.Random;
 
 public class SelectItem extends JFrame {
     private JLabel resultLabel;
+    private JLabel imageLabel;
     private JButton spinButton;
     private JPanel wheelPanel;
     private JLabel timeRemainingLabel;
     private Random random;
-    private HashSet<String> selectedItems;
-    private final String[][] items = SelectChallenge.getItems();
+    private HashSet<Item> selectedItems;
+    private final Item[] items = SelectChallenge.getItems();
     private final int waitingTime;
+    private static final String startMessage2 = SelectChallenge.getStartMessage2();
 
     public SelectItem(long waitingTime) {
         this.waitingTime = (int) waitingTime;
@@ -48,7 +50,6 @@ public class SelectItem extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        // Timer-Panel
         JPanel timerPanel = new JPanel();
         timerPanel.setPreferredSize(new Dimension(600, 50));
         JLabel timerLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>Zeit bis zum nächsten Item:<br></div></html>");
@@ -56,15 +57,17 @@ public class SelectItem extends JFrame {
         timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + waitingTime + " Sekunden</div></html>");
         timerPanel.add(timeRemainingLabel);
 
-        // Result- and Spin-Button-Panel
         JPanel resultPanel = new JPanel();
         resultPanel.setLayout(new BorderLayout());
-        wheelPanel = new JPanel();
-        wheelPanel.setLayout(new GridLayout(1, 1));
+        wheelPanel = new JPanel(new GridLayout(2, 1));
         wheelPanel.setBackground(Color.GREEN);
-        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Drücke 'Spin' um zu starten<br></div></html>");
+        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>" + startMessage2 + "<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        wheelPanel.add(resultLabel);
+        imageLabel = new JLabel();
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        imageLabel.setVerticalAlignment(SwingConstants.CENTER);
+        wheelPanel.add(resultLabel, BorderLayout.AFTER_LAST_LINE);
+        wheelPanel.add(imageLabel, BorderLayout.AFTER_LAST_LINE);
 
         spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Spin<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
@@ -73,7 +76,6 @@ public class SelectItem extends JFrame {
         resultPanel.add(wheelPanel, BorderLayout.CENTER);
         resultPanel.add(spinButton, BorderLayout.SOUTH);
 
-        // Main-Panel
         mainPanel.add(timerPanel, BorderLayout.NORTH);
         mainPanel.add(resultPanel, BorderLayout.CENTER);
 
@@ -91,6 +93,7 @@ public class SelectItem extends JFrame {
         if (selectedItems.size() == items.length) {
             wheelPanel.setBackground(Color.BLACK);
             resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: white;'>Alle Items verwendet! Bitte schließe das Fenster zum Fortfahren!</div></html>");
+            imageLabel.setIcon(null);
             spinButton.setEnabled(false);
         } else {
             spinButton.setEnabled(false);
@@ -112,17 +115,18 @@ public class SelectItem extends JFrame {
             });
             timer.start();
             wheelPanel.setBackground(Color.RED);
-            String selectedItem = selectRandomItem();
-            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Item:<br>" + selectedItem + "</div></html>");
+            Item selectedItem = selectRandomItem();
+            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Item:<br>" + selectedItem.getName() + "</div></html>");
+            imageLabel.setIcon(selectedItem.getImage());
         }
     }
 
-    private String selectRandomItem() {
+    private Item selectRandomItem() {
         int index = random.nextInt(items.length);
-        String selectedItem = items[index][0];
+        Item selectedItem = items[index];
         while (selectedItems.contains(selectedItem)) {
             index = random.nextInt(items.length);
-            selectedItem = items[index][0];
+            selectedItem = items[index];
         }
         selectedItems.add(selectedItem);
         return selectedItem;
