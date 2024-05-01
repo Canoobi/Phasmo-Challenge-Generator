@@ -9,13 +9,11 @@ import java.util.Random;
 
 public class SelectMap extends JFrame {
     private JLabel resultLabel;
-    private JButton spinButton;
-    private JPanel wheelPanel;
     private Random random;
     private String[][] maps = SelectChallenge.getMaps();
 
     public SelectMap() {
-        setTitle("Select Item");
+        setTitle("Select Map");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(600, 450);
         setLocationRelativeTo(null);
@@ -41,17 +39,16 @@ public class SelectMap extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        // Result- and Spin-Button-Panel
         JPanel resultPanel = new JPanel();
         resultPanel.setLayout(new BorderLayout());
-        wheelPanel = new JPanel();
+        JPanel wheelPanel = new JPanel();
         wheelPanel.setLayout(new GridLayout(1, 1));
         wheelPanel.setBackground(Color.WHITE);
         resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Press 'Get Map' to start<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wheelPanel.add(resultLabel);
 
-        spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get Map<br></div></html>");
+        JButton spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get Map<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
         spinButton.setBackground(Color.GREEN);
         spinButton.setPreferredSize(new Dimension(600, 100));
@@ -59,7 +56,6 @@ public class SelectMap extends JFrame {
         resultPanel.add(wheelPanel, BorderLayout.CENTER);
         resultPanel.add(spinButton, BorderLayout.SOUTH);
 
-        // Main-Panel
         mainPanel.add(resultPanel, BorderLayout.CENTER);
 
         add(mainPanel);
