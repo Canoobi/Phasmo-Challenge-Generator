@@ -31,9 +31,10 @@ Um eine eigene Version des Phasmo-Challenge-Generators zu erstellen, befolge die
    - ```{"text": "%Deine [$items$] Aufgabe hier einfügen%", "openSelectItemFrame": "false", "message": "%ZWINGEND eine Ausgabenachricht einfügen%", "reqPlayers": [%füge die Spieleranzahlen hinzu, die diese Aufgabe bekommen können (als int; kommasepariert)%]}``` für eine Aufgabe bei der 2 bis 12 zufällige Items an das Ende der Aufgabe angehangen werden sollen. Beachte, dass ```[$items$]``` in der Aufgabe vorkommen muss!
    - ```{"text": "%Deine [$numb$] Aufgabe einfügen%", "openSelectItemFrame": "false", "message": "%Optional eine abweichende Ausgabenachricht einfügen%", "reqPlayers": [%füge die Spieleranzahlen hinzu, die diese Aufgabe bekommen können (als int; kommasepariert)%]}``` für eine Aufgabe in der eine zufällige Zahl zwischen 1 und 8 vorkommen soll. Beachte, dass ```[$numb$]``` in der Aufgabe vorkommen muss! Soll eine abweichende Ausgabenachricht genutzt werden, muss darin ebenfalls ```[$numb$]``` vorkommen.
    - ```{"text": "%Deine [$color$] Aufgabe einfügen%", "openSelectItemFrame": "false", "message": "%Optional eine abweichende Ausgabenachricht einfügen%", "reqPlayers": [%füge die Spieleranzahlen hinzu, die diese Aufgabe bekommen können (als int; kommasepariert)%]}``` für eine Aufgabe in der eine zufällige Spielerfarbe vorkommen soll. Beachte, dass ```[$color$]``` in der Aufgabe vorkommen muss! Soll eine abweichende Ausgabenachricht genutzt werden, muss darin ebenfalls ```[$color$]``` vorkommen.
-5. Erstelle eine JAR-Datei als Artifact. Beachte, dass die 'json-simple'-Library inkludiert werden muss.
-6. Installiere und starte Launch4j. Wähle eine Output-Datei und die JAR-Datei aus und erstelle die EXE-Datei.
-7. Herzlichen Glückwunsch, du hast deine eigene Version des Phasmo-Challenge-Generators erstellt. Zur Verwendung fahre bei 'Verwendung' ab Punkt 2 fort.
+5. Füge in der Datei ```src\recources\penalties.json``` die Bestrafungen nach dem Fehlschlagen einer Challenge hinzu.
+6. Erstelle eine JAR-Datei als Artifact. Beachte, dass die 'json-simple'-Library inkludiert werden muss.
+7. Installiere und starte Launch4j. Wähle eine Output-Datei und die JAR-Datei aus und erstelle die EXE-Datei.
+8. Herzlichen Glückwunsch, du hast deine eigene Version des Phasmo-Challenge-Generators erstellt. Zur Verwendung fahre bei 'Verwendung' ab Punkt 2 fort.
 
 ## Java-Installation
 1. Lade dir Folgendes runter und installiere es:
@@ -85,9 +86,10 @@ To create your own version of the Phasmo Challenge Generator, follow these steps
    - ```{"text": "%Insert your [$items$] task here%", "openSelectItemFrame": "false", "message": "%MANDATORY: Insert an output message here%", "reqPlayers": [%add the number of players who can receive this task (as int; comma separated)%]}``` for a task where 2 to 12 random items should be appended to the end of the task. Note that ```[$items$]``` must be present in the task!
    - ```{"text": "%Insert your [$numb$] task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%", "reqPlayers": [%add the number of players who can receive this task (as int; comma separated)%]}``` for a task where a random number between 1 and 8 should be included. Note that ```[$numb$]``` must be present in the task! If a different output message is to be used, ```[$numb$]``` must also be included in it.
    - ```{"text": "%Insert your [$color$] task here%", "openSelectItemFrame": "false", "message": "%Optionally insert a different output message%", "reqPlayers": [%add the number of players who can receive this task (as int; comma separated)%]}``` for a task where a random player color should be included. Note that ```[$color$]``` must be present in the task! If a different output message is to be used, ```[$color$]``` must also be included in it.
-5. Create a JAR file as an artifact. Note that the 'json-simple' library must be included.
-6. Install and start Launch4j. Choose an output file and the JAR file and create the EXE file.
-7. Congratulations, you have created your own version of the Phasmo Challenge Generator. To use it, continue from point 2 under 'Usage'.
+5. Add the penalties after the failure of a challenge in the file ```src\recources\penalties.json```.
+6. Create a JAR file as an artifact. Note that the 'json-simple' library must be included.
+7. Install and start Launch4j. Choose an output file and the JAR file and create the EXE file.
+8. Congratulations, you have created your own version of the Phasmo Challenge Generator. To use it, continue from point 2 under 'Usage'.
 
 ## Java Installation
 1. Download and install the following:

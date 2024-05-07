@@ -4,19 +4,55 @@
     "message": ""
   },
   {
-    "name": "HIER",
+    "name": "Bis nach dem nächsten Hunt im Raum des Geistes eingesperrt",
     "message": ""
   },
   {
-    "name": "WEITERE",
+    "name": "Bis nach dem nächsten Hunt im Raum, in dem die Challenge gefailt wurde, eingesperrt",
     "message": ""
   },
   {
-    "name": "BESTRAFUNGEN",
+    "name": "Bis nach dem nächsten Hunt Geräusche machen",
     "message": ""
   },
   {
-    "name": "EINFÜGEN",
+    "name": "[$key$] darf bis zum Ende der Runde nicht mehr verwendet werden",
+    "message": ""
+  },
+  {
+    "name": "Bis nach dem nächsten Hunt den Ton ausmachen",
+    "message": ""
+  },
+  {
+    "name": "Im nächsten Hunt alle elektrischen Geräte anlassen",
+    "message": ""
+  },
+  {
+    "name": "Bis zum Ende der Runde einen Inventar-Slot weniger",
+    "message": ""
+  },
+  {
+    "name": "Während des Hunts nicht sprinten",
+    "message": ""
+  },
+  {
+    "name": "Bis zum Ende der Runde darf die betroffene Person nicht mehr in einem beleuchteten Raum stehen",
+    "message": ""
+  },
+  {
+    "name": "Keine Räucherstäbchen mehr benutzen",
+    "message": ""
+  },
+  {
+    "name": "Nur noch die Kerze als Lichtquelle verwenden",
+    "message": ""
+  },
+  {
+    "name": "Kopfhörer falschrum aufsetzen",
+    "message": ""
+  },
+  {
+    "name": "Nach jedem Satz den Namen des Geistes sagen",
     "message": ""
   }
 ]

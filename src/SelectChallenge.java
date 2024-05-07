@@ -29,6 +29,7 @@ public class SelectChallenge extends JFrame {
     private static int playerNum;
     private static long waitingTime;
     private static String[] playerColors;
+    private static String[] keys;
     private static final WheelElement[] wheelElements = readElementsFromJSON("/tasks.json");
     private static Item[] items;
     private static String[][] maps;
@@ -69,6 +70,10 @@ public class SelectChallenge extends JFrame {
 
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/icon.png")));
         setIconImage(icon.getImage());
+    }
+
+    public static String[] getKeys(){
+        return keys;
     }
 
     public static Item[] getItems() {
@@ -412,10 +417,16 @@ public class SelectChallenge extends JFrame {
             maxPlayerNumber = (long) jsonObject.get("max-player-number");
             waitingTime = (long) jsonObject.get("waiting-time-for-new-item");
 
-            JSONArray jsonArray = (JSONArray) jsonObject.get("player-colors");
-            playerColors = new String[jsonArray.size()];
-            for (int i = 0; i < jsonArray.size(); i++) {
-                playerColors[i] = jsonArray.get(i).toString();
+            JSONArray playerColorsArr = (JSONArray) jsonObject.get("player-colors");
+            playerColors = new String[playerColorsArr.size()];
+            for (int i = 0; i < playerColorsArr.size(); i++) {
+                playerColors[i] = playerColorsArr.get(i).toString();
+            }
+
+            JSONArray keysArr = (JSONArray) jsonObject.get("keys");
+            keys = new String[keysArr.size()];
+            for (int i = 0; i < keysArr.size(); i++) {
+                keys[i] = keysArr.get(i).toString();
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();

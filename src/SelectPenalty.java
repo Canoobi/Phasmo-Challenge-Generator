@@ -10,7 +10,8 @@ import java.util.Random;
 public class SelectPenalty extends JFrame {
     private JLabel resultLabel;
     private Random random;
-    private String[][] penalties = SelectChallenge.getPenalties();
+    private final String[] keys = SelectChallenge.getKeys();
+    private final String[][] penalties = SelectChallenge.getPenalties();
 
     public SelectPenalty() {
         setTitle("Select Penalty");
@@ -70,12 +71,19 @@ public class SelectPenalty extends JFrame {
 
     private void spinWheel() {
         String selectedItem = selectRandomItem();
-        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Penalty:<br>" + selectedItem + "</div></html>");
+        if (selectedItem.contains("[$key$]")) {
+            int num = keys.length;
+            int rand = random.nextInt(num);
+            String replString = selectedItem.replace("[$key$]", "<div style='font-size: 20px; text-align: center; color: red;'>'" + keys[rand] + "'</div><div style='font-size: 20px; text-align: center; color: black;'>");
+            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Penalty:<br>" + replString + "</div></html>");
+        } else {
+            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Penalty:<br>" + selectedItem + "</div></html>");
+        }
     }
 
     private String selectRandomItem() {
         int index = random.nextInt(penalties.length);
-        if (penalties[index][1].equals("")){
+        if (penalties[index][1].isEmpty()) {
             return penalties[index][0];
         } else {
             return penalties[index][1];
