@@ -7,13 +7,14 @@ import java.awt.event.WindowEvent;
 import java.util.Objects;
 import java.util.Random;
 
-public class SelectMap extends JFrame {
+public class SelectPenalty extends JFrame {
     private JLabel resultLabel;
     private Random random;
-    private String[][] maps = SelectChallenge.getMaps();
+    private final String[] keys = SelectChallenge.getKeys();
+    private final String[][] penalties = SelectChallenge.getPenalties();
 
-    public SelectMap() {
-        setTitle("Select Map");
+    public SelectPenalty() {
+        setTitle("Select Penalty");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(600, 450);
         setLocationRelativeTo(null);
@@ -30,7 +31,7 @@ public class SelectMap extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                SelectChallenge.setMapButton(true);
+                SelectChallenge.setPenaltyButton(true);
             }
         });
     }
@@ -44,11 +45,11 @@ public class SelectMap extends JFrame {
         JPanel wheelPanel = new JPanel();
         wheelPanel.setLayout(new GridLayout(1, 1));
         wheelPanel.setBackground(Color.WHITE);
-        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Press 'Get Map' to start<br></div></html>");
+        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Press 'Get Penalty' to start<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wheelPanel.add(resultLabel);
 
-        JButton spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get Map<br></div></html>");
+        JButton spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get Penalty<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
         spinButton.setBackground(Color.GREEN);
         spinButton.setPreferredSize(new Dimension(600, 100));
@@ -70,11 +71,23 @@ public class SelectMap extends JFrame {
 
     private void spinWheel() {
         String selectedItem = selectRandomItem();
-        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Map:<br>" + selectedItem + "</div></html>");
+        if (selectedItem.contains("[$key$]")) {
+            int num = keys.length;
+            int rand = random.nextInt(num);
+            String replString = selectedItem.replace("[$key$]", "<div style='font-size: 20px; text-align: center; color: red;'>'" + keys[rand] + "'</div><div style='font-size: 20px; text-align: center; color: black;'>");
+            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Penalty:<br>" + replString + "</div></html>");
+        } else {
+            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Penalty:<br>" + selectedItem + "</div></html>");
+        }
     }
 
     private String selectRandomItem() {
-        int index = random.nextInt(maps.length);
-        return maps[index][0];
+        int index = random.nextInt(penalties.length);
+        if (penalties[index][1].isEmpty()) {
+            return penalties[index][0];
+        } else {
+            return penalties[index][1];
+        }
     }
+
 }

@@ -19,6 +19,7 @@ public class SelectChallenge extends JFrame {
     private static JPanel buttonPanel;
     private static JButton spinButton;
     private static JButton mapButton;
+    private static JButton penaltyButton;
     private static String startMessage1;
     private static String startMessage2;
     private static String challengeMessage;
@@ -28,9 +29,11 @@ public class SelectChallenge extends JFrame {
     private static int playerNum;
     private static long waitingTime;
     private static String[] playerColors;
+    private static String[] keys;
     private static final WheelElement[] wheelElements = readElementsFromJSON("/tasks.json");
     private static Item[] items;
     private static String[][] maps;
+    private static String[][] penalties;
 
     public SelectChallenge() {
         this.random = new Random();
@@ -38,6 +41,7 @@ public class SelectChallenge extends JFrame {
         initSettingsFromJSON();
         getItemsFromJSON();
         getMapsFromJSON();
+        getPenaltiesFromJSON();
 
         System.out.println(wheelElements.length);
         System.out.println("start-message: " + startMessage1 + "\nchallenge-message: " + challengeMessage + "\nwaiting-time: " + waitingTime + "\n");
@@ -52,6 +56,10 @@ public class SelectChallenge extends JFrame {
         for (int i = 0; i < maps.length; i++) {
             System.out.println(i + ": " + maps[i][0] + "; " + maps[i][1]);
         }
+        System.out.println();
+        for (int i = 0; i < penalties.length; i++) {
+            System.out.println(i + ": " + penalties[i][0] + "; " + penalties[i][1]);
+        }
 
         setTitle("Challenge-Wheel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,12 +72,20 @@ public class SelectChallenge extends JFrame {
         setIconImage(icon.getImage());
     }
 
+    public static String[] getKeys(){
+        return keys;
+    }
+
     public static Item[] getItems() {
         return items;
     }
 
     public static String[][] getMaps() {
         return maps;
+    }
+
+    public static String[][] getPenalties() {
+        return penalties;
     }
 
     public static String getStartMessage2() {
@@ -118,9 +134,20 @@ public class SelectChallenge extends JFrame {
 
         mapButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open Map-Selector<br></div></html>");
         mapButton.addActionListener(new MapButtonListener());
-        mapButton.setPreferredSize(new Dimension(1200, 50));
+        mapButton.setPreferredSize(new Dimension(600, 50));
         mapButton.setFont(new Font("Arial", Font.BOLD, 18));
         mapButton.setBackground(Color.WHITE);
+
+        penaltyButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open Penalty-Selector<br></div></html>");
+        penaltyButton.addActionListener(new PenaltyButtonListener());
+        penaltyButton.setPreferredSize(new Dimension(600, 50));
+        penaltyButton.setFont(new Font("Arial", Font.BOLD, 18));
+        penaltyButton.setBackground(Color.WHITE);
+
+        JPanel openPanel = new JPanel(new GridLayout(1, 2));
+        openPanel.setPreferredSize(new Dimension(1200, 50));
+        openPanel.add(mapButton, BorderLayout.WEST);
+        openPanel.add(penaltyButton, BorderLayout.EAST);
 
         spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Spin<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
@@ -132,7 +159,7 @@ public class SelectChallenge extends JFrame {
         JPanel northPanel = new JPanel();
         northPanel.setPreferredSize(new Dimension(1200, 210));
         northPanel.add(playerNumPanel, BorderLayout.NORTH);
-        northPanel.add(mapButton, BorderLayout.SOUTH);
+        northPanel.add(openPanel, BorderLayout.SOUTH);
 
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(westBlock, BorderLayout.WEST);
@@ -168,6 +195,14 @@ public class SelectChallenge extends JFrame {
         public void actionPerformed(ActionEvent e) {
             new SelectMap();
             setMapButton(false);
+        }
+    }
+
+    public static class PenaltyButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new SelectPenalty();
+            setPenaltyButton(false);
         }
     }
 
@@ -207,6 +242,15 @@ public class SelectChallenge extends JFrame {
             mapButton.setBackground(Color.WHITE);
         } else {
             mapButton.setBackground(Color.RED);
+        }
+    }
+
+    public static void setPenaltyButton(boolean boo) {
+        penaltyButton.setEnabled(boo);
+        if (boo) {
+            penaltyButton.setBackground(Color.WHITE);
+        } else {
+            penaltyButton.setBackground(Color.RED);
         }
     }
 
@@ -321,7 +365,23 @@ public class SelectChallenge extends JFrame {
         }
     }
 
-    public static WheelElement[] readElementsFromJSON(String filename) {
+    private void getPenaltiesFromJSON() {
+        JSONParser parser = new JSONParser();
+        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/resources/penalties.json")) {
+            Object obj = parser.parse(new InputStreamReader(inputStream));
+            JSONArray jsonArray = (JSONArray) obj;
+            penalties = new String[jsonArray.size()][3];
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JSONObject item = (JSONObject) jsonArray.get(i);
+                penalties[i][0] = (String) item.get("name");
+                penalties[i][1] = (String) item.get("message");
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static WheelElement[] readElementsFromJSON(String filename) {
         JSONParser parser = new JSONParser();
         try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/resources" + filename)) {
             Object obj = parser.parse(new InputStreamReader(inputStream));
@@ -357,10 +417,16 @@ public class SelectChallenge extends JFrame {
             maxPlayerNumber = (long) jsonObject.get("max-player-number");
             waitingTime = (long) jsonObject.get("waiting-time-for-new-item");
 
-            JSONArray jsonArray = (JSONArray) jsonObject.get("player-colors");
-            playerColors = new String[jsonArray.size()];
-            for (int i = 0; i < jsonArray.size(); i++) {
-                playerColors[i] = jsonArray.get(i).toString();
+            JSONArray playerColorsArr = (JSONArray) jsonObject.get("player-colors");
+            playerColors = new String[playerColorsArr.size()];
+            for (int i = 0; i < playerColorsArr.size(); i++) {
+                playerColors[i] = playerColorsArr.get(i).toString();
+            }
+
+            JSONArray keysArr = (JSONArray) jsonObject.get("keys");
+            keys = new String[keysArr.size()];
+            for (int i = 0; i < keysArr.size(); i++) {
+                keys[i] = keysArr.get(i).toString();
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();

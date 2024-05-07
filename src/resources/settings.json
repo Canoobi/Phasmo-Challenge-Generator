@@ -10,5 +10,19 @@
     "BLAU",
     "GRÜN",
     "ROSA"
+  ],
+  "keys": [
+    "W-Taste",
+    "A-Taste",
+    "S-Taste",
+    "D-Taste",
+    "Sneak-Taste",
+    "Sprint-Taste",
+    "Drop-Taste",
+    "Walkie-Talkie-Taste",
+    "Linke Maustaste",
+    "Rechte Maustaste",
+    "Taschenlampen-Taste",
+    "Mausrad"
   ]
 }

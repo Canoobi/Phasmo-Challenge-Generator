@@ -191,10 +191,8 @@
   {
     "text": "Alle Items aus dem Haus in den Van bringen",
     "openSelectItemFrame": false,
-    "message": "",
+    "message": "ALLE Items, die sich im Haus befinden und aufgehoben werden können, müssen als erstes in den Van gebracht werden. (Der Breaker darf angemacht werden.)",
     "reqPlayers": [
-      1,
-      2,
       3,
       4
     ]
@@ -224,7 +222,6 @@
     "openSelectItemFrame": false,
     "message": "",
     "reqPlayers": [
-      2,
       3,
       4
     ]
@@ -234,7 +231,6 @@
     "openSelectItemFrame": false,
     "message": "",
     "reqPlayers": [
-      2,
       3,
       4
     ]
@@ -266,6 +262,16 @@
     "message": "Es darf/dürfen [$numb$] Item(s) mit ins Haus genommen werden, dann ist man dort eingesperrt",
     "reqPlayers": [
       1,
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "text": "Inverted Controls",
+    "openSelectItemFrame": false,
+    "message": "Inverted Controls: belege die Tasten wie folgt um: W <-> S; A <-> D",
+    "reqPlayers": [
       2,
       3,
       4
