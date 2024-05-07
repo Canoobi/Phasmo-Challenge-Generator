@@ -47,6 +47,7 @@ Um eine eigene Version des Phasmo-Challenge-Generators zu erstellen, befolge die
 ## JSON-Datein
 In der Datei ```src\resources\tasks.json``` sind die einzelnen Aufgaben gespeichert. Befolge die Anweisungen unter 'Eigene Version erstellen', um den Randomizer für eigene Aufgaben zu nutzen!
 In der Datei ```src\resources\items.json``` sind alle im Spiel verfügbaren Items und die Pfade zu deren Bildern hinterlegt.
+In der Datei ```src\resources\penalties.json``` sind alle Penalties hinterlegt.
 
 ## Mitwirkende
 @Josefine (Challenges)\
@@ -102,6 +103,7 @@ To create your own version of the Phasmo Challenge Generator, follow these steps
 ## JSON Files
 The file ```src\resources\tasks.json``` stores the individual tasks. Follow the instructions under 'Creating Your Own Version' to use the randomizer for your own tasks!
 The file ```src\resources\items.json``` contains all the items available in the game and the paths to their images.
+The file ```src\resources\penalties.json``` contains all penalties.
 
 ## Contributors
 @Josefine (Challenges)\
