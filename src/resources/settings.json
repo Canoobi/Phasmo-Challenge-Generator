@@ -1,6 +1,6 @@
 {
   "start-message-1": "Wähle die Anzahl der Spieler aus!",
-  "start-message-2": "Drücke 'Spin' zum starten!",
+  "start-message-2": "Press 'Spin' to start!",
   "challenge-message": "Die Challenge für diese Runde lautet:",
   "player-number": "Anzahl der Spieler:",
   "max-player-number": 4,
