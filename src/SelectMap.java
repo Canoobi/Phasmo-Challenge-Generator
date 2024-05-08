@@ -69,11 +69,11 @@ public class SelectMap extends JFrame {
     }
 
     private void spinWheel() {
-        String selectedItem = selectRandomItem();
-        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Map:<br>" + selectedItem + "</div></html>");
+        String selectedMap = selectRandomMap();
+        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Map:<br>" + selectedMap + "</div></html>");
     }
 
-    private String selectRandomItem() {
+    private String selectRandomMap() {
         int index = random.nextInt(maps.length);
         return maps[index][0];
     }
