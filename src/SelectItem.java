@@ -18,7 +18,6 @@ public class SelectItem extends JFrame {
     private HashSet<Item> selectedItems;
     private final Item[] items = SelectChallenge.getItems();
     private final int waitingTime;
-    private static final String startMessage2 = SelectChallenge.getStartMessage2();
 
     public SelectItem(long waitingTime) {
         this.waitingTime = (int) waitingTime;
@@ -42,6 +41,9 @@ public class SelectItem extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 SelectChallenge.setAllButtonsSavePlay(true);
+                if (waitingTime == 0) {
+                    SelectChallenge.setItemButton(true);
+                }
             }
         });
     }
@@ -50,18 +52,21 @@ public class SelectItem extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        JPanel timerPanel = new JPanel();
-        timerPanel.setPreferredSize(new Dimension(600, 50));
-        JLabel timerLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>Zeit bis zum nächsten Item:<br></div></html>");
-        timerPanel.add(timerLabel);
-        timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + waitingTime + " Sekunden</div></html>");
-        timerPanel.add(timeRemainingLabel);
+        if (waitingTime > 0) {
+            JPanel timerPanel = new JPanel();
+            timerPanel.setPreferredSize(new Dimension(600, 50));
+            JLabel timerLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>Zeit bis zum nächsten Item:<br></div></html>");
+            timerPanel.add(timerLabel);
+            timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + waitingTime + " Sekunden</div></html>");
+            timerPanel.add(timeRemainingLabel);
+            mainPanel.add(timerPanel, BorderLayout.NORTH);
+        }
 
         JPanel resultPanel = new JPanel();
         resultPanel.setLayout(new BorderLayout());
         wheelPanel = new JPanel(new GridLayout(2, 1));
         wheelPanel.setBackground(Color.GREEN);
-        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>" + startMessage2 + "<br></div></html>");
+        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Press 'Get Item' to start<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,15 +74,19 @@ public class SelectItem extends JFrame {
         wheelPanel.add(resultLabel, BorderLayout.AFTER_LAST_LINE);
         wheelPanel.add(imageLabel, BorderLayout.AFTER_LAST_LINE);
 
-        spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Spin<br></div></html>");
+        spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get Item<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
         spinButton.setPreferredSize(new Dimension(600, 100));
 
         resultPanel.add(wheelPanel, BorderLayout.CENTER);
         resultPanel.add(spinButton, BorderLayout.SOUTH);
 
-        mainPanel.add(timerPanel, BorderLayout.NORTH);
         mainPanel.add(resultPanel, BorderLayout.CENTER);
+
+        if (waitingTime <= 0) {
+            wheelPanel.setBackground(Color.WHITE);
+            spinButton.setBackground(Color.GREEN);
+        }
 
         add(mainPanel);
     }
@@ -85,7 +94,11 @@ public class SelectItem extends JFrame {
     private class SpinButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            spinWheel();
+            if (waitingTime > 0) {
+                spinWheel();
+            } else {
+                newItemWithoutDelay();
+            }
         }
     }
 
@@ -103,7 +116,7 @@ public class SelectItem extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     timeRemainingLabel.setText("<html><div style='font-size: 19px; text-align: center;'>" + timeLeft + " Sekunden</div></html>");
-                    if (timeLeft == 0) {
+                    if (timeLeft <= 0) {
                         ((Timer) e.getSource()).stop();
                         wheelPanel.setBackground(Color.GREEN);
                         spinButton.setEnabled(true);
@@ -130,5 +143,12 @@ public class SelectItem extends JFrame {
         }
         selectedItems.add(selectedItem);
         return selectedItem;
+    }
+
+    private void newItemWithoutDelay() {
+        int index = random.nextInt(items.length);
+        Item selectedItem = items[index];
+        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Item:<br>" + selectedItem.getName() + "</div></html>");
+        imageLabel.setIcon(selectedItem.getImage());
     }
 }

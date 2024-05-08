@@ -4,12 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Random;
 
 public class SelectPenalty extends JFrame {
     private JLabel resultLabel;
+    private JButton getKeyButton;
+    private JButton spinButton;
     private Random random;
+    private String selectedPenalty;
+    private HashSet<String> selectedKeys;
     private final String[] keys = SelectChallenge.getKeys();
     private final String[][] penalties = SelectChallenge.getPenalties();
 
@@ -43,13 +48,19 @@ public class SelectPenalty extends JFrame {
         JPanel resultPanel = new JPanel();
         resultPanel.setLayout(new BorderLayout());
         JPanel wheelPanel = new JPanel();
-        wheelPanel.setLayout(new GridLayout(1, 1));
+        wheelPanel.setLayout(new BorderLayout());
         wheelPanel.setBackground(Color.WHITE);
         resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Press 'Get Penalty' to start<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wheelPanel.add(resultLabel);
+        getKeyButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get New Key<br></div></html>");
+        getKeyButton.addActionListener(new SpinKeyButtonListener());
+        getKeyButton.setBackground(Color.WHITE);
+        getKeyButton.setPreferredSize(new Dimension(600, 70));
+        getKeyButton.setVisible(false);
+        wheelPanel.add(getKeyButton, BorderLayout.SOUTH);
 
-        JButton spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get Penalty<br></div></html>");
+        spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get Penalty<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
         spinButton.setBackground(Color.GREEN);
         spinButton.setPreferredSize(new Dimension(600, 100));
@@ -69,15 +80,39 @@ public class SelectPenalty extends JFrame {
         }
     }
 
+    private class SpinKeyButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            selectKey(selectedPenalty);
+        }
+    }
+
+    private void selectKey(String selectedPenalty) {
+        getKeyButton.setVisible(true);
+        getKeyButton.setEnabled(true);
+        int num = keys.length;
+        int rand = random.nextInt(num);
+        while (selectedKeys.contains(keys[rand])) {
+            rand = random.nextInt(num);
+        }
+        selectedKeys.add(keys[rand]);
+        if (selectedKeys.size() == num) {
+            getKeyButton.setEnabled(false);
+        }
+        String replString = selectedPenalty.replace("[$key$]", "<div style='font-size: 20px; text-align: center; color: red;'>'" + keys[rand] + "'</div><div style='font-size: 20px; text-align: center; color: black;'>");
+        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Penalty:<br>" + replString + "</div></html>");
+    }
+
     private void spinWheel() {
-        String selectedItem = selectRandomItem();
-        if (selectedItem.contains("[$key$]")) {
-            int num = keys.length;
-            int rand = random.nextInt(num);
-            String replString = selectedItem.replace("[$key$]", "<div style='font-size: 20px; text-align: center; color: red;'>'" + keys[rand] + "'</div><div style='font-size: 20px; text-align: center; color: black;'>");
-            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Penalty:<br>" + replString + "</div></html>");
+        selectedPenalty = selectRandomItem();
+        if (selectedPenalty.contains("[$key$]")) {
+            selectedKeys = new HashSet<>();
+            spinButton.setText("<html><div style='font-size: 22px; text-align: center;'>Get New Penalty<br></div></html>");
+            selectKey(selectedPenalty);
         } else {
-            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Penalty:<br>" + selectedItem + "</div></html>");
+            getKeyButton.setVisible(false);
+            spinButton.setText("<html><div style='font-size: 22px; text-align: center;'>Get Penalty<br></div></html>");
+            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Penalty:<br>" + selectedPenalty + "</div></html>");
         }
     }
 
@@ -89,5 +124,4 @@ public class SelectPenalty extends JFrame {
             return penalties[index][1];
         }
     }
-
 }

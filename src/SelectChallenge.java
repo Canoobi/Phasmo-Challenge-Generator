@@ -20,6 +20,7 @@ public class SelectChallenge extends JFrame {
     private static JButton spinButton;
     private static JButton mapButton;
     private static JButton penaltyButton;
+    private static JButton itemButton;
     private static String startMessage1;
     private static String startMessage2;
     private static String challengeMessage;
@@ -72,7 +73,7 @@ public class SelectChallenge extends JFrame {
         setIconImage(icon.getImage());
     }
 
-    public static String[] getKeys(){
+    public static String[] getKeys() {
         return keys;
     }
 
@@ -134,20 +135,27 @@ public class SelectChallenge extends JFrame {
 
         mapButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open Map-Selector<br></div></html>");
         mapButton.addActionListener(new MapButtonListener());
-        mapButton.setPreferredSize(new Dimension(600, 50));
+        mapButton.setPreferredSize(new Dimension(400, 50));
         mapButton.setFont(new Font("Arial", Font.BOLD, 18));
         mapButton.setBackground(Color.WHITE);
 
         penaltyButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open Penalty-Selector<br></div></html>");
         penaltyButton.addActionListener(new PenaltyButtonListener());
-        penaltyButton.setPreferredSize(new Dimension(600, 50));
+        penaltyButton.setPreferredSize(new Dimension(400, 50));
         penaltyButton.setFont(new Font("Arial", Font.BOLD, 18));
         penaltyButton.setBackground(Color.WHITE);
 
-        JPanel openPanel = new JPanel(new GridLayout(1, 2));
+        itemButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open Item-Selector<br></div></html>");
+        itemButton.addActionListener(new ItemButtonListener());
+        itemButton.setPreferredSize(new Dimension(400, 50));
+        itemButton.setFont(new Font("Arial", Font.BOLD, 18));
+        itemButton.setBackground(Color.WHITE);
+
+        JPanel openPanel = new JPanel(new GridLayout(1, 3));
         openPanel.setPreferredSize(new Dimension(1200, 50));
         openPanel.add(mapButton, BorderLayout.WEST);
-        openPanel.add(penaltyButton, BorderLayout.EAST);
+        openPanel.add(penaltyButton, BorderLayout.CENTER);
+        openPanel.add(itemButton, BorderLayout.EAST);
 
         spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Spin<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
@@ -206,6 +214,14 @@ public class SelectChallenge extends JFrame {
         }
     }
 
+    public static class ItemButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new SelectItem(0);
+            setItemButton(false);
+        }
+    }
+
     public static void setAllButtons(boolean boo) {
         setPlayerNumberButtons(boo, false);
         setSpinButton(boo);
@@ -251,6 +267,15 @@ public class SelectChallenge extends JFrame {
             penaltyButton.setBackground(Color.WHITE);
         } else {
             penaltyButton.setBackground(Color.RED);
+        }
+    }
+
+    public static void setItemButton(boolean boo) {
+        itemButton.setEnabled(boo);
+        if (boo) {
+            itemButton.setBackground(Color.WHITE);
+        } else {
+            itemButton.setBackground(Color.RED);
         }
     }
 
