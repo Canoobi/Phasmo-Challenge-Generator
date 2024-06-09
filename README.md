@@ -50,8 +50,8 @@ In der Datei ```src\resources\items.json``` sind alle im Spiel verfügbaren Item
 In der Datei ```src\resources\penalties.json``` sind alle Penalties hinterlegt.
 
 ## Mitwirkende
-@Josefine (Challenges)\
-@Carlo (Challenge Generator)
+@blnpurple (Challenges)\
+@canoobi (Challenge Generator)
 
 # ---------------------------------------------
 
@@ -106,5 +106,5 @@ The file ```src\resources\items.json``` contains all the items available in the 
 The file ```src\resources\penalties.json``` contains all penalties.
 
 ## Contributors
-@Josefine (Challenges)\
-@Carlo (Challenge Generator)
+@blnpurple (Challenges)\
+@canoobi (Challenge Generator)
