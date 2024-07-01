@@ -24,7 +24,7 @@ public class SelectItem extends JFrame {
 
         setTitle("Select Item");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(600, 450);
+        setSize(600, 400);
         setLocationRelativeTo(null);
 
         selectedItems = new HashSet<>();
@@ -89,6 +89,7 @@ public class SelectItem extends JFrame {
         }
 
         add(mainPanel);
+        setLocation(1140,730);
     }
 
     private class SpinButtonListener implements ActionListener {

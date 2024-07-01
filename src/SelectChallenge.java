@@ -64,8 +64,7 @@ public class SelectChallenge extends JFrame {
 
         setTitle("Challenge-Wheel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 1200);
-        setLocationRelativeTo(null);
+        setSize(1120, 1120);
 
         createComponents();
 
@@ -101,7 +100,7 @@ public class SelectChallenge extends JFrame {
 
         JLabel playerNumLabel = new JLabel("<html><div style='font-size: 23px; text-align: center;'>" + playerNumberText + "</div></html>");
         playerNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        playerNumPanel.setPreferredSize(new Dimension(1200, 150));
+        playerNumPanel.setPreferredSize(new Dimension(1120, 150));
         playerNumPanel.setFont(new Font("Arial", Font.BOLD, 35));
         playerNumPanel.add(playerNumLabel, BorderLayout.AFTER_LAST_LINE);
 
@@ -135,37 +134,37 @@ public class SelectChallenge extends JFrame {
 
         mapButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open Map-Selector<br></div></html>");
         mapButton.addActionListener(new MapButtonListener());
-        mapButton.setPreferredSize(new Dimension(400, 50));
+        mapButton.setPreferredSize(new Dimension(373, 50));
         mapButton.setFont(new Font("Arial", Font.BOLD, 18));
         mapButton.setBackground(Color.WHITE);
 
         penaltyButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open Penalty-Selector<br></div></html>");
         penaltyButton.addActionListener(new PenaltyButtonListener());
-        penaltyButton.setPreferredSize(new Dimension(400, 50));
+        penaltyButton.setPreferredSize(new Dimension(374, 50));
         penaltyButton.setFont(new Font("Arial", Font.BOLD, 18));
         penaltyButton.setBackground(Color.WHITE);
 
         itemButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open Item-Selector<br></div></html>");
         itemButton.addActionListener(new ItemButtonListener());
-        itemButton.setPreferredSize(new Dimension(400, 50));
+        itemButton.setPreferredSize(new Dimension(373, 50));
         itemButton.setFont(new Font("Arial", Font.BOLD, 18));
         itemButton.setBackground(Color.WHITE);
 
         JPanel openPanel = new JPanel(new GridLayout(1, 3));
-        openPanel.setPreferredSize(new Dimension(1200, 50));
+        openPanel.setPreferredSize(new Dimension(1120, 50));
         openPanel.add(mapButton, BorderLayout.WEST);
         openPanel.add(penaltyButton, BorderLayout.CENTER);
         openPanel.add(itemButton, BorderLayout.EAST);
 
         spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Spin<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
-        spinButton.setPreferredSize(new Dimension(1200, 100));
+        spinButton.setPreferredSize(new Dimension(1120, 100));
         spinButton.setFont(new Font("Arial", Font.BOLD, 22));
         spinButton.setBackground(Color.GREEN);
         setSpinButton(false);
 
         JPanel northPanel = new JPanel();
-        northPanel.setPreferredSize(new Dimension(1200, 210));
+        northPanel.setPreferredSize(new Dimension(1120, 210));
         northPanel.add(playerNumPanel, BorderLayout.NORTH);
         northPanel.add(openPanel, BorderLayout.SOUTH);
 
@@ -176,6 +175,7 @@ public class SelectChallenge extends JFrame {
         mainPanel.add(spinButton, BorderLayout.SOUTH);
 
         add(mainPanel);
+        setLocation(10,10);
     }
 
     public class PlayerNumButtonListener implements ActionListener {

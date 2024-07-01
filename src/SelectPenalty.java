@@ -21,7 +21,7 @@ public class SelectPenalty extends JFrame {
     public SelectPenalty() {
         setTitle("Select Penalty");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(600, 450);
+        setSize(600, 400);
         setLocationRelativeTo(null);
 
         random = new Random();
@@ -71,6 +71,7 @@ public class SelectPenalty extends JFrame {
         mainPanel.add(resultPanel, BorderLayout.CENTER);
 
         add(mainPanel);
+        setLocation(1140,320);
     }
 
     private class SpinButtonListener implements ActionListener {

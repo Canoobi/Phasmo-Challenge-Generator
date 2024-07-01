@@ -15,7 +15,7 @@ public class SelectMap extends JFrame {
     public SelectMap() {
         setTitle("Select Map");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(600, 450);
+        setSize(600, 300);
         setLocationRelativeTo(null);
 
         random = new Random();
@@ -59,6 +59,7 @@ public class SelectMap extends JFrame {
         mainPanel.add(resultPanel, BorderLayout.CENTER);
 
         add(mainPanel);
+        setLocation(1140,10);
     }
 
     private class SpinButtonListener implements ActionListener {
