@@ -40,9 +40,10 @@ public class SelectItem extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                SelectChallenge.setAllButtonsSavePlay(true);
-                if (waitingTime == 0) {
+                if (waitingTime <= 0) {
                     SelectChallenge.setItemButton(true);
+                } else {
+                    SelectChallenge.setAllButtonsSavePlay(true);
                 }
             }
         });
@@ -89,7 +90,7 @@ public class SelectItem extends JFrame {
         }
 
         add(mainPanel);
-        setLocation(1140,730);
+        setLocation(1140, 730);
     }
 
     private class SpinButtonListener implements ActionListener {
