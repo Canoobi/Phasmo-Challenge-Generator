@@ -175,7 +175,7 @@ public class SelectChallenge extends JFrame {
         mainPanel.add(spinButton, BorderLayout.SOUTH);
 
         add(mainPanel);
-        setLocation(10,10);
+        setLocation(10, 10);
     }
 
     public class PlayerNumButtonListener implements ActionListener {

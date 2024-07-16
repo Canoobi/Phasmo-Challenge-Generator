@@ -71,7 +71,7 @@ public class SelectPenalty extends JFrame {
         mainPanel.add(resultPanel, BorderLayout.CENTER);
 
         add(mainPanel);
-        setLocation(1140,320);
+        setLocation(1140, 320);
     }
 
     private class SpinButtonListener implements ActionListener {

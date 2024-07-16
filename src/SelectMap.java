@@ -59,7 +59,7 @@ public class SelectMap extends JFrame {
         mainPanel.add(resultPanel, BorderLayout.CENTER);
 
         add(mainPanel);
-        setLocation(1140,10);
+        setLocation(1140, 10);
     }
 
     private class SpinButtonListener implements ActionListener {
