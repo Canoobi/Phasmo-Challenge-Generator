@@ -5,7 +5,7 @@ on:
       - create-release-pipeline
 
 jobs:
-  create-helloworld-windows-installers:
+  create-windows-installer-release:
     runs-on: windows-latest
 
     steps:

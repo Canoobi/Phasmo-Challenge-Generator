@@ -31,7 +31,7 @@
         "target": "[INSTALLDIR]\\PhasmoChallengeGenerator.exe",
         "wdir": "INSTALLDIR",
         "arguments": "",
-        "icon": "[INSTALLDIR]\\src\\resources\\icon.ico"
+        "icon": ""
       }
     ]
   },
