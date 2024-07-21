@@ -1,6 +1,8 @@
 name: create-release.yml
 on:
-  workflow_dispatch
+  push:
+    branches:
+      - create-release-pipeline
 
 jobs:
   create-helloworld-windows-installers:
