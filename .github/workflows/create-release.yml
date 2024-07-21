@@ -1,0 +1,29 @@
+name: create-release.yml
+on:
+  workflow_dispatch
+
+jobs:
+  create-helloworld-windows-installers:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install go-msi
+        run: choco install -y "go-msi"
+
+      - name: Build Windows Installer MSI
+        uses: AliceOh/CreateWindowsInstaller@1.0.0
+        with:
+          exefile: 'PhasmoChallengeGenerator.exe'
+
+      - name: Upload MSI to release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "test"
+          prerelease: true
+          title: "Windows Development Build"
+          files: |
+            PhasmoChallengeGenerator.exe.msi
