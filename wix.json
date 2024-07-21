@@ -28,7 +28,7 @@
       {
         "name": "Phasmophobia-Challenge-Generator",
         "description": "MSI pakage for your product",
-        "target": "[INSTALLDIR]\\PhasmoChallengeGenerator.exe",
+        "target": "[INSTALLDIR]\\PhasmoChallengeGenerator",
         "wdir": "INSTALLDIR",
         "arguments": "",
         "icon": ""

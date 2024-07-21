@@ -28,4 +28,4 @@ jobs:
           prerelease: true
           title: "Phasmo-Challenge-Generator-*"
           files: |
-            PhasmoChallengeGenerator.exe.msi
+            PhasmoChallengeGenerator.msi
