@@ -1,6 +1,6 @@
 {
-  "product": "Your Product",
-  "company": "Your Company",
+  "product": "Phasmophobia-Challenge-Generator",
+  "company": "Canoob",
   "license": "LICENSE",
   "upgrade-code": "",
   "files": {
@@ -26,7 +26,7 @@
     "guid": "",
     "items": [
       {
-        "name": "Your Product MSI",
+        "name": "Phasmophobia-Challenge-Generator",
         "description": "MSI pakage for your product",
         "target": "[INSTALLDIR]\\PhasmoChallengeGenerator.exe",
         "wdir": "INSTALLDIR",

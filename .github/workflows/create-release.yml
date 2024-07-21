@@ -26,6 +26,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: latest
           prerelease: true
-          title: "Windows Development Build"
+          title: "Phasmo-Challenge-Generator-*"
           files: |
             PhasmoChallengeGenerator.exe.msi
