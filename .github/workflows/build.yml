@@ -1,4 +1,4 @@
-name: Build exe
+name: build-exe-from-jar
 
 on:
   push
