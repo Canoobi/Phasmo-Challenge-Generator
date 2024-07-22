@@ -17,7 +17,30 @@ jobs:
           java-version: '22'
           distribution: 'temurin'
 
-      - name: Download Launch4j
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Package into executable
+        run: mvn javafx:run
+
+      - name: Move .exe to application folder
         run: |
-          wget https://sourceforge.net/projects/launch4j/files/launch4j-3/3.14/launch4j-3.14-linux-x64.tgz
-          tar -xvf launch4j-3.14-linux-x64.tgz
+          mkdir -p application
+          mv build/libs/*.exe application/
+
+      - name: Commit .exe to repository
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add Application/*.exe
+          git commit -m 'Add compiled .exe file'
+          git push
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
