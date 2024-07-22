@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Phasmo-Challenge-Generator.iml" filepath="$PROJECT_DIR$/Phasmo-Challenge-Generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MavenTest.iml" filepath="$PROJECT_DIR$/MavenTest.iml" />
     </modules>
   </component>
 </project>
