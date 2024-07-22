@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="akathist.maven.plugins.launch4j.plugin" type="repository">
+    <properties maven-id="com.akathist.maven.plugins.launch4j:launch4j-maven-plugin:2.5.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/resources/launch4j-maven-plugin-2.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/launch4j-3.50-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/commons-beanutils-1.9.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/jgoodies-common-1.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/forms-1.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/flatlaf-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/ant-1.10.14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/ant-launcher-1.10.14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/xstream-1.4.20.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/mxparser-1.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/xmlpull-1.1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/resources/commons-lang3-3.14.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
