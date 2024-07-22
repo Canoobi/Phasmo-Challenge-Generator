@@ -28,7 +28,7 @@ public class SelectPenalty extends JFrame {
 
         createComponents();
 
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/icon.png")));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("icon.png")));
         setIconImage(icon.getImage());
 
         setVisible(true);

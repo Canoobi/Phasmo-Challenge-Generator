@@ -68,7 +68,7 @@ public class SelectChallenge extends JFrame {
 
         createComponents();
 
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/icon.png")));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("icon.png")));
         setIconImage(icon.getImage());
     }
 
@@ -360,7 +360,7 @@ public class SelectChallenge extends JFrame {
 
     private void getItemsFromJSON() {
         JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/resources/items.json")) {
+        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("items.json")) {
             Object obj = parser.parse(new InputStreamReader(inputStream));
             JSONArray jsonArray = (JSONArray) obj;
             items = new Item[jsonArray.size()];
@@ -375,7 +375,7 @@ public class SelectChallenge extends JFrame {
 
     private void getMapsFromJSON() {
         JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/resources/maps.json")) {
+        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("maps.json")) {
             Object obj = parser.parse(new InputStreamReader(inputStream));
             JSONArray jsonArray = (JSONArray) obj;
             maps = new String[jsonArray.size()][3];
@@ -392,7 +392,7 @@ public class SelectChallenge extends JFrame {
 
     private void getPenaltiesFromJSON() {
         JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/resources/penalties.json")) {
+        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("penalties.json")) {
             Object obj = parser.parse(new InputStreamReader(inputStream));
             JSONArray jsonArray = (JSONArray) obj;
             penalties = new String[jsonArray.size()][3];
@@ -408,7 +408,7 @@ public class SelectChallenge extends JFrame {
 
     private static WheelElement[] readElementsFromJSON(String filename) {
         JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/resources" + filename)) {
+        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream(filename)) {
             Object obj = parser.parse(new InputStreamReader(inputStream));
             JSONArray jsonArray = (JSONArray) obj;
             WheelElement[] elements = new WheelElement[jsonArray.size()];
@@ -430,7 +430,7 @@ public class SelectChallenge extends JFrame {
 
     private static void initSettingsFromJSON() {
         JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/resources/settings.json")) {
+        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("settings.json")) {
             Object obj = parser.parse(new InputStreamReader(inputStream));
 
             JSONObject jsonObject = (JSONObject) obj;
