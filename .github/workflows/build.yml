@@ -35,7 +35,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add Application/yourapp.exe
+          git add application/PhasmoChallengeGenerator.exe
           git commit -m 'Add built EXE'
           git push
         env:
