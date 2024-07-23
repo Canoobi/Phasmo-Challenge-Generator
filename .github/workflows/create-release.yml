@@ -1,7 +1,7 @@
 name: create-release-with-msi-installer
 
 on:
-  workflow_dispatch:
+  pull_request
 
 jobs:
   create-windows-installer-release:
@@ -12,14 +12,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install go-msi
+        if: contains(github.event.pull_request.title, 'RELEASE')
         run: choco install -y "go-msi"
 
       - name: Build Windows Installer MSI
+        if: contains(github.event.pull_request.title, 'RELEASE')
         uses: AliceOh/CreateWindowsInstaller@1.0.0
         with:
           exefile: 'PhasmoChallengeGenerator.exe'
 
       - name: Upload MSI to release
+        if: contains(github.event.pull_request.title, 'RELEASE')
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
