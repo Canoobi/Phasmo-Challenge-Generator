@@ -1,47 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org</groupId>
+    <groupId>com.files</groupId>
     <artifactId>Phasmo-Challenge-Generator</artifactId>
-    <version>1.5-SNAPSHOT</version>
-
-    <properties>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <version>1.5</version>
+    <packaging>jar</packaging>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.akathist.maven.plugins.launch4j/launch4j-maven-plugin -->
-        <dependency>
-            <groupId>com.akathist.maven.plugins.launch4j</groupId>
-            <artifactId>launch4j-maven-plugin</artifactId>
-            <version>2.5.1</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>22</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>com.googlecode.json-simple:json-simple</include>
+                                </includes>
+                            </artifactSet>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.files.ChallengeRad</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
+                    <dontWrapJar>false</dontWrapJar>
+                    <headerType>gui</headerType>
+                    <jar>target/Phasmo-Challenge-Generator-1.5.jar</jar>
                     <outfile>application/PhasmoChallengeGenerator.exe</outfile>
-                    <jar>application/PhasmoChallengeGenerator.jar</jar>
-                    <mainClass>src/main/java.ChallengeRad.java</mainClass>
-                    <classpath>
-                        <mainJar/>
-                    </classpath>
+                    <chdir>.</chdir>
+                    <priority>normal</priority>
+                    <stayAlive>true</stayAlive>
+                    <restartOnCrash>false</restartOnCrash>
+                    <icon>src/main/resources/icon.ico</icon>
+                    <jre>
+                        <path>%JAVA_HOME%;%PATH%</path>
+                        <requiresJdk>true</requiresJdk>
+                        <requires64Bit>false</requires64Bit>
+                        <minVersion>1.8</minVersion>
+                        <maxVersion></maxVersion>
+                    </jre>
                 </configuration>
                 <executions>
                     <execution>
@@ -55,5 +85,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
