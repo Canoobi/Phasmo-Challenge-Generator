@@ -28,9 +28,6 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Move EXE to Application directory
-        run: cat application/PhasmoChallengeGenerator.exe
-
       - name: Commit and push EXE
         run: |
           git config --global user.name 'github-actions[bot]'
