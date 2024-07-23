@@ -1,7 +1,8 @@
 name: build-exe-from-jar
 
 on:
-  push
+  - push
+  - pull_request
 
 jobs:
   build-exe:
@@ -26,21 +27,3 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean package
-
-      - name: Package into executable
-        run: mvn javafx:run
-
-      - name: Move .exe to application folder
-        run: |
-          mkdir -p application
-          mv build/libs/*.exe application/
-
-      - name: Commit .exe to repository
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add Application/*.exe
-          git commit -m 'Add compiled .exe file'
-          git push
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
