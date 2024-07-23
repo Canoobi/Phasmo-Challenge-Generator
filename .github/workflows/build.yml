@@ -27,3 +27,16 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean package
+
+      - name: Move EXE to Application directory
+        run: mv target/yourapp.exe Application/yourapp.exe
+
+      - name: Commit and push EXE
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add Application/yourapp.exe
+          git commit -m 'Add built EXE'
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
