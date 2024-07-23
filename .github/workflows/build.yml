@@ -40,7 +40,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Trigger Second Pipeline
-        if: success() && github.event.pull_request.title == 'RELEASE**'
+        if: ${{ github.event.pull_request && github.event.pull_request.title == 'RELEASE' }}
         uses: actions/github-script@v3
         with:
           script: |
