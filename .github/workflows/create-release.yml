@@ -1,9 +1,7 @@
 name: create-release-with-msi-installer
 
 on:
-  workflow_run:
-    workflows: ["build-exe-from-jar"]
-    types: [requested]
+  workflow_dispatch:
 
 jobs:
   create-windows-installer-release:

@@ -37,3 +37,15 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger Second Pipeline
+        if: success() && github.event.pull_request.title == 'RELEASE**'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'second-pipeline.yml',
+              ref: context.ref,
+            })
