@@ -2,121 +2,121 @@
   {
     "text": "Crucifix",
     "itemType": "optional",
-    "imagePath": "itemImages/cruzi.png",
+    "imagePath": "/itemImages/cruzi.png",
     "message": ""
   },
   {
     "text": "D.O.T.S. Projector",
     "itemType": "starter",
-    "imagePath": "itemImages/dots.png",
+    "imagePath": "/itemImages/dots.png",
     "message": ""
   },
   {
     "text": "EMF Reader",
     "itemType": "starter",
-    "imagePath": "itemImages/emf.png",
+    "imagePath": "/itemImages/emf.png",
     "message": ""
   },
   {
     "text": "Firelight",
     "itemType": "optional",
-    "imagePath": "itemImages/firelight.png",
+    "imagePath": "/itemImages/firelight.png",
     "message": ""
   },
   {
     "text": "Flashlight",
     "itemType": "starter",
-    "imagePath": "itemImages/flashlight.png",
+    "imagePath": "/itemImages/flashlight.png",
     "message": ""
   },
   {
     "text": "Ghost Writing Book",
     "itemType": "starter",
-    "imagePath": "itemImages/book.png",
+    "imagePath": "/itemImages/book.png",
     "message": ""
   },
   {
     "text": "Head Gear",
     "itemType": "optional",
-    "imagePath": "itemImages/headgear.png",
+    "imagePath": "/itemImages/headgear.png",
     "message": ""
   },
   {
     "text": "Igniter",
     "itemType": "optional",
-    "imagePath": "itemImages/igniter.png",
+    "imagePath": "/itemImages/igniter.png",
     "message": ""
   },
   {
     "text": "Incense",
     "itemType": "optional",
-    "imagePath": "itemImages/incense.png",
+    "imagePath": "/itemImages/incense.png",
     "message": ""
   },
   {
     "text": "Motion Sensor",
     "itemType": "optional",
-    "imagePath": "itemImages/motion.png",
+    "imagePath": "/itemImages/motion.png",
     "message": ""
   },
   {
     "text": "Parabolic Microphone",
     "itemType": "optional",
-    "imagePath": "itemImages/parabol.png",
+    "imagePath": "/itemImages/parabol.png",
     "message": ""
   },
   {
     "text": "Photo Camera",
     "itemType": "optional",
-    "imagePath": "itemImages/photocam.png",
+    "imagePath": "/itemImages/photocam.png",
     "message": ""
   },
   {
     "text": "Salt",
     "itemType": "optional",
-    "imagePath": "itemImages/salt.png",
+    "imagePath": "/itemImages/salt.png",
     "message": ""
   },
   {
     "text": "Sanity Medication",
     "itemType": "optional",
-    "imagePath": "itemImages/sanity.png",
+    "imagePath": "/itemImages/sanity.png",
     "message": ""
   },
   {
     "text": "Sound Sensor",
     "itemType": "optional",
-    "imagePath": "itemImages/sound.png",
+    "imagePath": "/itemImages/sound.png",
     "message": ""
   },
   {
     "text": "Spirit Box",
     "itemType": "starter",
-    "imagePath": "itemImages/box.png",
+    "imagePath": "/itemImages/box.png",
     "message": ""
   },
   {
     "text": "Thermometer",
     "itemType": "starter",
-    "imagePath": "itemImages/thermo.png",
+    "imagePath": "/itemImages/thermo.png",
     "message": ""
   },
   {
     "text": "Tripod",
     "itemType": "optional",
-    "imagePath": "itemImages/tripod.png",
+    "imagePath": "/itemImages/tripod.png",
     "message": ""
   },
   {
     "text": "UV Light",
     "itemType": "starter",
-    "imagePath": "itemImages/uv.png",
+    "imagePath": "/itemImages/uv.png",
     "message": ""
   },
   {
     "text": "Video Camera",
     "itemType": "starter",
-    "imagePath": "itemImages/videocam.png",
+    "imagePath": "/itemImages/videocam.png",
     "message": ""
   }
 ]
