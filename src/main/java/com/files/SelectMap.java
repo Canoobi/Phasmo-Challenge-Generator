@@ -12,7 +12,7 @@ import java.util.Random;
 public class SelectMap extends JFrame {
     private JLabel resultLabel;
     private Random random;
-    private String[][] maps = SelectChallenge.getMaps();
+    private final Map[] maps = SelectChallenge.getMaps();
 
     public SelectMap() {
         setTitle("Select Map");
@@ -78,6 +78,6 @@ public class SelectMap extends JFrame {
 
     private String selectRandomMap() {
         int index = random.nextInt(maps.length);
-        return maps[index][0];
+        return maps[index].getName();
     }
 }

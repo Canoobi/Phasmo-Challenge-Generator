@@ -24,7 +24,7 @@ public class SelectItem extends JFrame {
     public SelectItem(long waitingTime) {
         this.waitingTime = (int) waitingTime;
 
-        setTitle("Select com.files.Item");
+        setTitle("Select Item");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(600, 400);
         setLocationRelativeTo(null);
@@ -57,7 +57,7 @@ public class SelectItem extends JFrame {
         if (waitingTime > 0) {
             JPanel timerPanel = new JPanel();
             timerPanel.setPreferredSize(new Dimension(600, 50));
-            JLabel timerLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>Zeit bis zum nächsten com.files.Item:<br></div></html>");
+            JLabel timerLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>Zeit bis zum nächsten Item:<br></div></html>");
             timerPanel.add(timerLabel);
             timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + waitingTime + " Sekunden</div></html>");
             timerPanel.add(timeRemainingLabel);
@@ -68,7 +68,7 @@ public class SelectItem extends JFrame {
         resultPanel.setLayout(new BorderLayout());
         wheelPanel = new JPanel(new GridLayout(2, 1));
         wheelPanel.setBackground(Color.GREEN);
-        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Press 'Get com.files.Item' to start<br></div></html>");
+        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Press 'Get Item' to start<br></div></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -76,7 +76,7 @@ public class SelectItem extends JFrame {
         wheelPanel.add(resultLabel, BorderLayout.AFTER_LAST_LINE);
         wheelPanel.add(imageLabel, BorderLayout.AFTER_LAST_LINE);
 
-        spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get com.files.Item<br></div></html>");
+        spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get Item<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
         spinButton.setPreferredSize(new Dimension(600, 100));
 
@@ -132,7 +132,7 @@ public class SelectItem extends JFrame {
             timer.start();
             wheelPanel.setBackground(Color.RED);
             Item selectedItem = selectRandomItem();
-            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>com.files.Item:<br>" + selectedItem.getName() + "</div></html>");
+            resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Item:<br>" + selectedItem.getName() + "</div></html>");
             imageLabel.setIcon(selectedItem.getImage());
         }
     }
@@ -151,7 +151,7 @@ public class SelectItem extends JFrame {
     private void newItemWithoutDelay() {
         int index = random.nextInt(items.length);
         Item selectedItem = items[index];
-        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>com.files.Item:<br>" + selectedItem.getName() + "</div></html>");
+        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Item:<br>" + selectedItem.getName() + "</div></html>");
         imageLabel.setIcon(selectedItem.getImage());
     }
 }

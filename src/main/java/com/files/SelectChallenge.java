@@ -23,33 +23,42 @@ public class SelectChallenge extends JFrame {
     private static JButton mapButton;
     private static JButton penaltyButton;
     private static JButton itemButton;
+    private Random random;
+    private static int playerNum;
+    private static Challenge[] challenges;
+    private static Item[] items;
+    private static Map[] maps;
+    private static Penalty[] penalties;
     private static String startMessage1;
     private static String startMessage2;
     private static String challengeMessage;
     private static String playerNumberText;
     private static long maxPlayerNumber;
-    private Random random;
-    private static int playerNum;
     private static long waitingTime;
     private static String[] playerColors;
     private static String[] keys;
-    private static final WheelElement[] wheelElements = readElementsFromJSON("/tasks.json");
-    private static Item[] items;
-    private static String[][] maps;
-    private static String[][] penalties;
+    private PersistanceHandler persistanceHandler;
 
     public SelectChallenge() {
+        this.persistanceHandler = new PersistanceHandler();
         this.random = new Random();
+        challenges = persistanceHandler.getChallengesFromJSON();
+        items = persistanceHandler.getItemsFromJSON();
+        maps = persistanceHandler.getMapsFromJSON();
+        penalties = persistanceHandler.getPenaltiesFromJSON();
+        startMessage1 = persistanceHandler.getTextFromSettingsJSON("start-message-1");
+        startMessage2 = persistanceHandler.getTextFromSettingsJSON("start-message-2");
+        challengeMessage = persistanceHandler.getTextFromSettingsJSON("challenge-message");
+        playerNumberText = persistanceHandler.getTextFromSettingsJSON("player-number");
+        maxPlayerNumber = persistanceHandler.getNumFromSettingsJSON("max-player-number");
+        waitingTime = persistanceHandler.getNumFromSettingsJSON("waiting-time-for-new-item");
+        playerColors = persistanceHandler.getArrayFromSettingsJSON("player-colors");
+        keys = persistanceHandler.getArrayFromSettingsJSON("keys");
 
-        initSettingsFromJSON();
-        getItemsFromJSON();
-        getMapsFromJSON();
-        getPenaltiesFromJSON();
-
-        System.out.println(wheelElements.length);
+        System.out.println(challenges.length);
         System.out.println("start-message: " + startMessage1 + "\nchallenge-message: " + challengeMessage + "\nwaiting-time: " + waitingTime + "\n");
-        for (int i = 0; i < wheelElements.length; i++) {
-            System.out.println(i + ": " + wheelElements[i].text() + "; " + wheelElements[i].openSelectItemFrame());
+        for (int i = 0; i < challenges.length; i++) {
+            System.out.println(i + ": " + challenges[i].text() + "; " + challenges[i].openSelectItemFrame());
         }
         System.out.println();
         for (int i = 0; i < items.length; i++) {
@@ -57,11 +66,11 @@ public class SelectChallenge extends JFrame {
         }
         System.out.println();
         for (int i = 0; i < maps.length; i++) {
-            System.out.println(i + ": " + maps[i][0] + "; " + maps[i][1]);
+            System.out.println(i + ": " + maps[i].getName() + "; " + maps[i].getSize() + "; " + maps[i].getMessage());
         }
         System.out.println();
         for (int i = 0; i < penalties.length; i++) {
-            System.out.println(i + ": " + penalties[i][0] + "; " + penalties[i][1]);
+            System.out.println(i + ": " + penalties[i].getName() + "; " + penalties[i].getMessage());
         }
 
         setTitle("Challenge-Wheel");
@@ -82,11 +91,11 @@ public class SelectChallenge extends JFrame {
         return items;
     }
 
-    public static String[][] getMaps() {
+    public static Map[] getMaps() {
         return maps;
     }
 
-    public static String[][] getPenalties() {
+    public static Penalty[] getPenalties() {
         return penalties;
     }
 
@@ -146,7 +155,7 @@ public class SelectChallenge extends JFrame {
         penaltyButton.setFont(new Font("Arial", Font.BOLD, 18));
         penaltyButton.setBackground(Color.WHITE);
 
-        itemButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open com.files.Item-Selector<br></div></html>");
+        itemButton = new JButton("<html><div style='font-size: 18px; text-align: center;'>Open Item-Selector<br></div></html>");
         itemButton.addActionListener(new ItemButtonListener());
         itemButton.setPreferredSize(new Dimension(373, 50));
         itemButton.setFont(new Font("Arial", Font.BOLD, 18));
@@ -283,7 +292,7 @@ public class SelectChallenge extends JFrame {
 
     private void spinWheel() {
         setAllButtonsSavePlay(false);
-        int spins = 20 + random.nextInt(wheelElements.length);
+        int spins = 20 + random.nextInt(challenges.length);
         int delay = 100;
 
         Timer timer = new Timer(delay, new ActionListener() {
@@ -291,23 +300,23 @@ public class SelectChallenge extends JFrame {
             int currentIndex = 0;
 
             public void actionPerformed(ActionEvent e) {
-                if (wheelElements[currentIndex].message().isEmpty()) {
-                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + wheelElements[currentIndex].text() + "</div></html>");
+                if (challenges[currentIndex].message().isEmpty()) {
+                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + challenges[currentIndex].text() + "</div></html>");
                 } else {
-                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + wheelElements[currentIndex].message() + "</div></html>");
+                    resultLabel.setText("<html><div style='font-size: 18px; text-align: center;'>" + challenges[currentIndex].message() + "</div></html>");
                 }
 
-                currentIndex = (currentIndex + 1) % wheelElements.length;
+                currentIndex = (currentIndex + 1) % challenges.length;
 
                 count++;
-                if (count >= spins && wheelElements[currentIndex].containsRightPlayerNum(playerNum)) {
+                if (count >= spins && challenges[currentIndex].containsRightPlayerNum(playerNum)) {
                     ((Timer) e.getSource()).stop();
-                    if (wheelElements[currentIndex].openSelectItemFrame()) {
+                    if (challenges[currentIndex].openSelectItemFrame()) {
                         setLabelText(currentIndex);
                         new SelectItem(waitingTime);
-                    } else if (wheelElements[currentIndex].text().contains("[$items$]")) {
+                    } else if (challenges[currentIndex].text().contains("[$items$]")) {
                         int numberOfItems = 2 + random.nextInt(11);
-                        StringBuilder selectedItemsText = new StringBuilder("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 20px; text-align: center; color: black;'>" + wheelElements[currentIndex].message() + "<br>");
+                        StringBuilder selectedItemsText = new StringBuilder("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 20px; text-align: center; color: black;'>" + challenges[currentIndex].message() + "<br>");
                         HashSet<Integer> selectedIndexes = new HashSet<>();
                         while (selectedIndexes.size() < numberOfItems) {
                             int randomIndex = random.nextInt(items.length);
@@ -322,24 +331,24 @@ public class SelectChallenge extends JFrame {
                         selectedItemsText.append("</div></html>");
                         resultLabel.setText(selectedItemsText.toString());
                         setAllButtonsSavePlay(true);
-                    } else if (wheelElements[currentIndex].text().contains("[$numb$]")) {
+                    } else if (challenges[currentIndex].text().contains("[$numb$]")) {
                         int numberOfItems = 1 + random.nextInt(8);
-                        if (wheelElements[currentIndex].message().contains("[$numb$]")) {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].message().replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
+                        if (challenges[currentIndex].message().contains("[$numb$]")) {
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + challenges[currentIndex].message().replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
                         } else {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].text().replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + challenges[currentIndex].text().replace("[$numb$]", String.valueOf(numberOfItems)) + "</div></html>");
                         }
                         setAllButtonsSavePlay(true);
-                    } else if (wheelElements[currentIndex].text().contains("[$color$]")) {
+                    } else if (challenges[currentIndex].text().contains("[$color$]")) {
                         int num = playerColors.length;
                         if (playerNum < num) {
                             num = playerNum;
                         }
                         int rand = random.nextInt(num);
-                        if (wheelElements[currentIndex].message().contains("[$color$]")) {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].message().replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
+                        if (challenges[currentIndex].message().contains("[$color$]")) {
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + challenges[currentIndex].message().replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
                         } else {
-                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[currentIndex].text().replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
+                            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + challenges[currentIndex].text().replace("[$color$]", String.valueOf(playerColors[rand])) + "</div></html>");
                         }
                         setAllButtonsSavePlay(true);
                     } else {
@@ -353,110 +362,10 @@ public class SelectChallenge extends JFrame {
     }
 
     private void setLabelText(int index) {
-        if (wheelElements[index].message().isEmpty()) {
-            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[index].text() + "</div></html>");
+        if (challenges[index].message().isEmpty()) {
+            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + challenges[index].text() + "</div></html>");
         } else {
-            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + wheelElements[index].message() + "</div></html>");
-        }
-    }
-
-    private void getItemsFromJSON() {
-        JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/items.json")) {
-            Object obj = parser.parse(new InputStreamReader(inputStream));
-            JSONArray jsonArray = (JSONArray) obj;
-            items = new Item[jsonArray.size()];
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject item = (JSONObject) jsonArray.get(i);
-                items[i] = new Item((String) item.get("text"), (String) item.get("itemType"), (String) item.get("imagePath"), (String) item.get("message"));
-            }
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void getMapsFromJSON() {
-        JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/maps.json")) {
-            Object obj = parser.parse(new InputStreamReader(inputStream));
-            JSONArray jsonArray = (JSONArray) obj;
-            maps = new String[jsonArray.size()][3];
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject item = (JSONObject) jsonArray.get(i);
-                maps[i][0] = (String) item.get("name");
-                maps[i][1] = (String) item.get("size");
-                maps[i][2] = (String) item.get("message");
-            }
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void getPenaltiesFromJSON() {
-        JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/penalties.json")) {
-            Object obj = parser.parse(new InputStreamReader(inputStream));
-            JSONArray jsonArray = (JSONArray) obj;
-            penalties = new String[jsonArray.size()][3];
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject item = (JSONObject) jsonArray.get(i);
-                penalties[i][0] = (String) item.get("name");
-                penalties[i][1] = (String) item.get("message");
-            }
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static WheelElement[] readElementsFromJSON(String filename) {
-        JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream(filename)) {
-            Object obj = parser.parse(new InputStreamReader(inputStream));
-            JSONArray jsonArray = (JSONArray) obj;
-            WheelElement[] elements = new WheelElement[jsonArray.size()];
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject item = (JSONObject) jsonArray.get(i);
-                JSONArray array = (JSONArray) item.get("reqPlayers");
-                int[] reqPlayers = new int[array.size()];
-                for (int j = 0; j < array.size(); j++) {
-                    reqPlayers[j] = Integer.parseInt(array.get(j).toString());
-                }
-                elements[i] = new WheelElement((String) item.get("text"), (Boolean) item.get("openSelectItemFrame"), (String) item.get("message"), reqPlayers);
-            }
-            return elements;
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-            return new WheelElement[0];
-        }
-    }
-
-    private static void initSettingsFromJSON() {
-        JSONParser parser = new JSONParser();
-        try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/settings.json")) {
-            Object obj = parser.parse(new InputStreamReader(inputStream));
-
-            JSONObject jsonObject = (JSONObject) obj;
-
-            startMessage1 = jsonObject.get("start-message-1").toString();
-            startMessage2 = jsonObject.get("start-message-2").toString();
-            challengeMessage = jsonObject.get("challenge-message").toString();
-            playerNumberText = jsonObject.get("player-number").toString();
-            maxPlayerNumber = (long) jsonObject.get("max-player-number");
-            waitingTime = (long) jsonObject.get("waiting-time-for-new-item");
-
-            JSONArray playerColorsArr = (JSONArray) jsonObject.get("player-colors");
-            playerColors = new String[playerColorsArr.size()];
-            for (int i = 0; i < playerColorsArr.size(); i++) {
-                playerColors[i] = playerColorsArr.get(i).toString();
-            }
-
-            JSONArray keysArr = (JSONArray) jsonObject.get("keys");
-            keys = new String[keysArr.size()];
-            for (int i = 0; i < keysArr.size(); i++) {
-                keys[i] = keysArr.get(i).toString();
-            }
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+            resultLabel.setText("<html><div style='font-size: 22px; text-align: center; color: red;'>" + challengeMessage + "<br><div style='font-size: 18px; text-align: center; color: black;'>" + challenges[index].message() + "</div></html>");
         }
     }
 }
