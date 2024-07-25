@@ -23,6 +23,10 @@ jobs:
         with:
           exefile: 'PhasmoChallengeGenerator.exe'
 
+      - name: Rename MSI-Installer file
+        if: contains(github.event.pull_request.title, 'RELEASE')
+        run: mv PhasmoChallengeGenerator.exe.msi PhasmoChallengeGenerator.msi
+
       - name: Upload MSI to release
         if: contains(github.event.pull_request.title, 'RELEASE')
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -33,4 +37,4 @@ jobs:
           prerelease: true
           title: "Phasmo-Challenge-Generator-*"
           files: |
-            PhasmoChallengeGenerator.exe.msi
+            PhasmoChallengeGenerator.msi
