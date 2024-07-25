@@ -17,8 +17,8 @@ public class SelectPenalty extends JFrame {
     private Random random;
     private String selectedPenalty;
     private HashSet<String> selectedKeys;
+    private final Penalty[] penalties = SelectChallenge.getPenalties();
     private final String[] keys = SelectChallenge.getKeys();
-    private final String[][] penalties = SelectChallenge.getPenalties();
 
     public SelectPenalty() {
         setTitle("Select Penalty");
@@ -29,10 +29,7 @@ public class SelectPenalty extends JFrame {
         random = new Random();
 
         createComponents();
-
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/icon.png")));
-        setIconImage(icon.getImage());
-
+        setIconImage(getIconImage());
         setVisible(true);
 
         addWindowListener(new WindowAdapter() {
@@ -121,10 +118,10 @@ public class SelectPenalty extends JFrame {
 
     private String selectRandomItem() {
         int index = random.nextInt(penalties.length);
-        if (penalties[index][1].isEmpty()) {
-            return penalties[index][0];
+        if (penalties[index].getMessage().isEmpty()) {
+            return penalties[index].getName();
         } else {
-            return penalties[index][1];
+            return penalties[index].getMessage();
         }
     }
 }
