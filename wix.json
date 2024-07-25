@@ -1,0 +1,43 @@
+{
+  "product": "Phasmophobia-Challenge-Generator",
+  "company": "Canoob",
+  "license": "LICENSE",
+  "upgrade-code": "",
+  "files": {
+    "guid": "",
+    "items": [
+      "bin/PhasmoChallengeGenerator.exe"
+    ]
+  },
+  "env": {
+    "guid": "",
+    "vars": [
+      {
+        "name": "PATH",
+        "value": "[INSTALLDIR]",
+        "permanent": "no",
+        "system": "no",
+        "action": "set",
+        "part": "last"
+      }
+    ]
+  },
+  "shortcuts": {
+    "guid": "",
+    "items": [
+      {
+        "name": "Phasmophobia-Challenge-Generator",
+        "description": "MSI pakage for your product",
+        "target": "[INSTALLDIR]\\PhasmoChallengeGenerator",
+        "wdir": "INSTALLDIR",
+        "arguments": "",
+        "icon": ""
+      }
+    ]
+  },
+  "choco": {
+    "description": "generate MSI package for Your Product project",
+    "tags": "Your Product",
+    "license-url": "https://opensource.org/licenses/MIT"
+  }
+}

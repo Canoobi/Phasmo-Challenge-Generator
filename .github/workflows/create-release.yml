@@ -1,0 +1,36 @@
+name: create-release-with-msi-installer
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  create-windows-installer-release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install go-msi
+        if: contains(github.event.pull_request.title, 'RELEASE') && github.event.pull-request.merged == true
+        run: choco install -y "go-msi"
+
+      - name: Build Windows Installer MSI
+        if: contains(github.event.pull_request.title, 'RELEASE') && github.event.pull-request.merged == true
+        uses: AliceOh/CreateWindowsInstaller@1.0.0
+        with:
+          exefile: 'PhasmoChallengeGenerator.exe'
+
+      - name: Upload MSI to release
+        if: contains(github.event.pull_request.title, 'RELEASE') && github.event.pull-request.merged == true
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: latest
+          draft: true
+          prerelease: true
+          title: "Phasmo-Challenge-Generator-*"
+          files: |
+            PhasmoChallengeGenerator.exe.msi

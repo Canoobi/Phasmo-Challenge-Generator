@@ -1,12 +1,7 @@
-name: Build exe
+name: build-exe-from-jar
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  push
 
 jobs:
   build-exe:
@@ -22,7 +17,22 @@ jobs:
           java-version: '22'
           distribution: 'temurin'
 
-      - name: Download Launch4j
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Commit and push EXE
         run: |
-          wget https://sourceforge.net/projects/launch4j/files/launch4j-3/3.14/launch4j-3.14-linux-x64.tgz
-          tar -xvf launch4j-3.14-linux-x64.tgz
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add application/PhasmoChallengeGenerator.exe
+          git commit -m 'Add built EXE'
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

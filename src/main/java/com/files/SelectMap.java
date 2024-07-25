@@ -1,3 +1,5 @@
+package com.files;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,7 +24,7 @@ public class SelectMap extends JFrame {
 
         createComponents();
 
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/icon.png")));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/icon.png")));
         setIconImage(icon.getImage());
 
         setVisible(true);
