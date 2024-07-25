@@ -4,17 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Random;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class SelectChallenge extends JFrame {
     private JLabel resultLabel;
@@ -37,6 +29,7 @@ public class SelectChallenge extends JFrame {
     private static long waitingTime;
     private static String[] playerColors;
     private static String[] keys;
+    private Image iconImage;
     private PersistanceHandler persistanceHandler;
 
     public SelectChallenge() {
@@ -54,6 +47,7 @@ public class SelectChallenge extends JFrame {
         waitingTime = persistanceHandler.getNumFromSettingsJSON("waiting-time-for-new-item");
         playerColors = persistanceHandler.getArrayFromSettingsJSON("player-colors");
         keys = persistanceHandler.getArrayFromSettingsJSON("keys");
+        iconImage = persistanceHandler.getIconImage();
 
         System.out.println(challenges.length);
         System.out.println("start-message: " + startMessage1 + "\nchallenge-message: " + challengeMessage + "\nwaiting-time: " + waitingTime + "\n");
@@ -78,9 +72,7 @@ public class SelectChallenge extends JFrame {
         setSize(1120, 1120);
 
         createComponents();
-
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/icon.png")));
-        setIconImage(icon.getImage());
+        setIconImage(iconImage);
     }
 
     public static String[] getKeys() {
@@ -101,6 +93,10 @@ public class SelectChallenge extends JFrame {
 
     public static String getStartMessage2() {
         return startMessage2;
+    }
+
+    public Image getIconImage() {
+        return iconImage;
     }
 
     private void createComponents() {

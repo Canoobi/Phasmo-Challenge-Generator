@@ -23,10 +23,7 @@ public class SelectMap extends JFrame {
         random = new Random();
 
         createComponents();
-
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/icon.png")));
-        setIconImage(icon.getImage());
-
+        setIconImage(getIconImage());
         setVisible(true);
 
         addWindowListener(new WindowAdapter() {

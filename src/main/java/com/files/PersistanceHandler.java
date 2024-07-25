@@ -5,9 +5,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class PersistanceHandler {
     public Challenge[] getChallengesFromJSON() {
@@ -123,5 +126,9 @@ public class PersistanceHandler {
             e.printStackTrace();
             return new String[0];
         }
+    }
+
+    public Image getIconImage() {
+        return (new ImageIcon(Objects.requireNonNull(getClass().getResource("/icon.png")))).getImage();
     }
 }

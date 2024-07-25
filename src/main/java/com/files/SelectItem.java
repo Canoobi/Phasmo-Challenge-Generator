@@ -33,10 +33,7 @@ public class SelectItem extends JFrame {
         random = new Random();
 
         createComponents();
-
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/icon.png")));
-        setIconImage(icon.getImage());
-
+        setIconImage(getIconImage());
         setVisible(true);
 
         addWindowListener(new WindowAdapter() {
@@ -91,7 +88,7 @@ public class SelectItem extends JFrame {
         }
 
         add(mainPanel);
-        setLocation(1140,730);
+        setLocation(1140, 730);
     }
 
     private class SpinButtonListener implements ActionListener {
