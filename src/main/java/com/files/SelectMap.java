@@ -12,7 +12,7 @@ import java.util.Random;
 public class SelectMap extends JFrame {
     private JLabel resultLabel;
     private Random random;
-    private String[][] maps = SelectChallenge.getMaps();
+    private final Map[] maps = SelectChallenge.getMaps();
 
     public SelectMap() {
         setTitle("Select Map");
@@ -23,10 +23,7 @@ public class SelectMap extends JFrame {
         random = new Random();
 
         createComponents();
-
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/icon.png")));
-        setIconImage(icon.getImage());
-
+        setIconImage(getIconImage());
         setVisible(true);
 
         addWindowListener(new WindowAdapter() {
@@ -78,6 +75,6 @@ public class SelectMap extends JFrame {
 
     private String selectRandomMap() {
         int index = random.nextInt(maps.length);
-        return maps[index][0];
+        return maps[index].getName();
     }
 }
