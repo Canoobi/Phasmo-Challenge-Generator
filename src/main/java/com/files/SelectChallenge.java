@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Random;
 
 public class SelectChallenge extends JFrame {
@@ -48,24 +47,6 @@ public class SelectChallenge extends JFrame {
         playerColors = persistanceHandler.getArrayFromSettingsJSON("player-colors");
         keys = persistanceHandler.getArrayFromSettingsJSON("keys");
         iconImage = persistanceHandler.getIconImage();
-
-        System.out.println(challenges.length);
-        System.out.println("start-message: " + startMessage1 + "\nchallenge-message: " + challengeMessage + "\nwaiting-time: " + waitingTime + "\n");
-        for (int i = 0; i < challenges.length; i++) {
-            System.out.println(i + ": " + challenges[i].text() + "; " + challenges[i].openSelectItemFrame());
-        }
-        System.out.println();
-        for (int i = 0; i < items.length; i++) {
-            System.out.println(i + ": " + items[i].getName() + "; " + items[i].getItemType());
-        }
-        System.out.println();
-        for (int i = 0; i < maps.length; i++) {
-            System.out.println(i + ": " + maps[i].getName() + "; " + maps[i].getSize() + "; " + maps[i].getMessage());
-        }
-        System.out.println();
-        for (int i = 0; i < penalties.length; i++) {
-            System.out.println(i + ": " + penalties[i].getName() + "; " + penalties[i].getMessage());
-        }
 
         setTitle("Challenge-Wheel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -183,6 +164,11 @@ public class SelectChallenge extends JFrame {
 
         add(mainPanel);
         setLocation(10,10);
+    }
+
+    public JPanel getPanel() {
+        JPanel mainPanel = new JPanel();
+        return mainPanel;
     }
 
     public class PlayerNumButtonListener implements ActionListener {
