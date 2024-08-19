@@ -238,7 +238,7 @@
   {
     "text": "Mit Zufallsrad entscheiden, welches Item als nächstes mit ins Haus genommen werden darf",
     "openSelectItemFrame": true,
-    "message": "Jede Minute darf ein Item gezogen werden. Siehe extra Fenster.",
+    "message": "Jede Minute darf ein Item gezogen werden. Siehe rechts unten.",
     "reqPlayers": [
       2,
       3,
