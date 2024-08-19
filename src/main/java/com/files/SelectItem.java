@@ -17,22 +17,21 @@ public class SelectItem {
     JLabel timeRemainingLabel;
     Random random;
     HashSet<Item> selectedItems;
-    Item[] items = MainWindow.getItems();
+    Item[] items;
     int waitingTime;
+    MainWindow mainWindow;
 
-    public SelectItem(long waitingTime) {
+    public SelectItem(long waitingTime, MainWindow mainWindow) {
         this.waitingTime = (int) waitingTime;
+        this.mainWindow = mainWindow;
         selectedItems = new HashSet<>();
         random = new Random();
+        items = mainWindow.getItems();
         createComponents();
     }
 
     private void createComponents() {
         resultPanel = new JPanel(new BorderLayout());
-
-        resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Press 'Get Penalty' to start<br></div></html>");
-        resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
         wheelPanel = new JPanel(new GridLayout(2, 1));
         wheelPanel.setBackground(Color.GREEN);
         resultLabel = new JLabel("<html><div style='font-size: 22px; text-align: center;'>Press 'Get Item' to start<br></div></html>");
@@ -46,27 +45,59 @@ public class SelectItem {
         spinButton = new JButton("<html><div style='font-size: 22px; text-align: center;'>Get Item<br></div></html>");
         spinButton.addActionListener(new SpinButtonListener());
 
+        mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setPreferredSize(new Dimension(700, 380));
+        mainPanel.setMinimumSize(new Dimension(700, 380));
+        mainPanel.setMaximumSize(new Dimension(700, 380));
+
+        spinButton.setPreferredSize(new Dimension(700, 80));
+        spinButton.setMinimumSize(new Dimension(700, 80));
+        spinButton.setMaximumSize(new Dimension(700, 80));
+
+        resultPanel.add(wheelPanel, BorderLayout.CENTER);
+
         if (waitingTime <= 0) {
-            mainPanel = new JPanel(new GridLayout(2, 1));
-            mainPanel.setPreferredSize(new Dimension(700, 380));
             resultPanel.setPreferredSize(new Dimension(700, 300));
-            spinButton.setPreferredSize(new Dimension(700, 80));
-            mainPanel.add(resultLabel);
-            mainPanel.add(spinButton);
+            resultPanel.setMinimumSize(new Dimension(700, 300));
+            resultPanel.setMaximumSize(new Dimension(700, 300));
+
+            mainPanel.add(resultPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+            mainPanel.add(spinButton, new GridBagConstraints(0, 1, 1, 1, 1.0, 0.5, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
             wheelPanel.setBackground(Color.WHITE);
             spinButton.setBackground(Color.GREEN);
         } else {
-            mainPanel = new JPanel(new GridLayout(3, 1));
-            mainPanel.setPreferredSize(new Dimension(1200, 710));
-            resultPanel.setPreferredSize(new Dimension(1200, 590));
-            spinButton.setPreferredSize(new Dimension(1200, 60));
-
+            JButton closeButton = new JButton("X");
+            closeButton.addActionListener(new CloseButtonListener());
+            closeButton.setBackground(Color.RED);
+            closeButton.setPreferredSize(new Dimension(50, 50));
+            closeButton.setMinimumSize(new Dimension(50, 50));
+            closeButton.setMaximumSize(new Dimension(50, 50));
+            JPanel topPanel = new JPanel(new BorderLayout());
+            topPanel.setPreferredSize(new Dimension(700, 50));
+            topPanel.setMinimumSize(new Dimension(700, 50));
+            topPanel.setMaximumSize(new Dimension(700, 50));
             JPanel timerPanel = new JPanel();
-            timerPanel.setPreferredSize(new Dimension(1200, 60));
+            timerPanel.setPreferredSize(new Dimension(650, 50));
+            timerPanel.setMinimumSize(new Dimension(650, 50));
+            timerPanel.setMaximumSize(new Dimension(650, 50));
             JLabel timerLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>Zeit bis zum nächsten Item:<br></div></html>");
-            timerPanel.add(timerLabel);
             timeRemainingLabel = new JLabel("<html><div style='font-size: 19px; text-align: center;'>" + waitingTime + " Sekunden</div></html>");
+            timerPanel.add(timerLabel);
             timerPanel.add(timeRemainingLabel);
+
+            topPanel.add(closeButton, BorderLayout.WEST);
+            topPanel.add(timerPanel, BorderLayout.CENTER);
+
+            resultPanel.setPreferredSize(new Dimension(700, 250));
+            resultPanel.setMinimumSize(new Dimension(700, 250));
+            resultPanel.setMaximumSize(new Dimension(700, 250));
+
+            wheelPanel.setBackground(Color.GREEN);
+            spinButton.setBackground(Color.WHITE);
+
+            mainPanel.add(topPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.3, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+            mainPanel.add(resultPanel, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+            mainPanel.add(spinButton, new GridBagConstraints(0, 2, 1, 1, 1.0, 0.5, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
         }
     }
 
@@ -82,6 +113,13 @@ public class SelectItem {
             } else {
                 newItemWithoutDelay();
             }
+        }
+    }
+
+    private class CloseButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mainWindow.setGetItem(0);
         }
     }
 
@@ -117,6 +155,13 @@ public class SelectItem {
         }
     }
 
+    private void newItemWithoutDelay() {
+        int index = random.nextInt(items.length);
+        Item selectedItem = items[index];
+        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Item:<br>" + selectedItem.getName() + "</div></html>");
+        imageLabel.setIcon(selectedItem.getImage());
+    }
+
     private Item selectRandomItem() {
         int index = random.nextInt(items.length);
         Item selectedItem = items[index];
@@ -126,12 +171,5 @@ public class SelectItem {
         }
         selectedItems.add(selectedItem);
         return selectedItem;
-    }
-
-    private void newItemWithoutDelay() {
-        int index = random.nextInt(items.length);
-        Item selectedItem = items[index];
-        resultLabel.setText("<html><div style='font-size: 20px; text-align: center; color: black;'>Item:<br>" + selectedItem.getName() + "</div></html>");
-        imageLabel.setIcon(selectedItem.getImage());
     }
 }
