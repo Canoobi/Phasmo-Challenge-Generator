@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
-public class PersistanceHandler {
+public class PersistenceHandler {
     public Challenge[] getChallengesFromJSON() {
         JSONParser parser = new JSONParser();
         try (InputStream inputStream = SelectChallenge.class.getResourceAsStream("/tasks.json")) {

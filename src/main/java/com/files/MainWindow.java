@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
-    PersistanceHandler persistanceHandler;
+    PersistenceHandler persistenceHandler;
     Challenge[] challenges;
     Item[] items;
     Map[] maps;
@@ -27,21 +27,21 @@ public class MainWindow extends JFrame {
     SelectPenalty selectPenalty;
 
     public MainWindow() {
-        this.persistanceHandler = new PersistanceHandler();
+        this.persistenceHandler = new PersistenceHandler();
 
-        challenges = persistanceHandler.getChallengesFromJSON();
-        items = persistanceHandler.getItemsFromJSON();
-        maps = persistanceHandler.getMapsFromJSON();
-        penalties = persistanceHandler.getPenaltiesFromJSON();
-        startMessage1 = persistanceHandler.getTextFromSettingsJSON("start-message-1");
-        startMessage2 = persistanceHandler.getTextFromSettingsJSON("start-message-2");
-        challengeMessage = persistanceHandler.getTextFromSettingsJSON("challenge-message");
-        playerNumberText = persistanceHandler.getTextFromSettingsJSON("player-number");
-        maxPlayerNumber = persistanceHandler.getNumFromSettingsJSON("max-player-number");
-        waitingTime = persistanceHandler.getNumFromSettingsJSON("waiting-time-for-new-item");
-        playerColors = persistanceHandler.getArrayFromSettingsJSON("player-colors");
-        keys = persistanceHandler.getArrayFromSettingsJSON("keys");
-        iconImage = persistanceHandler.getIconImage();
+        challenges = persistenceHandler.getChallengesFromJSON();
+        items = persistenceHandler.getItemsFromJSON();
+        maps = persistenceHandler.getMapsFromJSON();
+        penalties = persistenceHandler.getPenaltiesFromJSON();
+        startMessage1 = persistenceHandler.getTextFromSettingsJSON("start-message-1");
+        startMessage2 = persistenceHandler.getTextFromSettingsJSON("start-message-2");
+        challengeMessage = persistenceHandler.getTextFromSettingsJSON("challenge-message");
+        playerNumberText = persistenceHandler.getTextFromSettingsJSON("player-number");
+        maxPlayerNumber = persistenceHandler.getNumFromSettingsJSON("max-player-number");
+        waitingTime = persistenceHandler.getNumFromSettingsJSON("waiting-time-for-new-item");
+        playerColors = persistenceHandler.getArrayFromSettingsJSON("player-colors");
+        keys = persistenceHandler.getArrayFromSettingsJSON("keys");
+        iconImage = persistenceHandler.getIconImage();
 
         selectChallenge = new SelectChallenge(this);
         selectPlayerNumber = new SelectPlayerNumber(this, selectChallenge);
