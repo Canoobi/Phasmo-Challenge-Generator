@@ -114,5 +114,7 @@ The file ```src\main\resources\penalties.json``` contains all penalties.
 The file ```src\main\resources\settings.json``` contains all necessary settings.
 
 ## Contributors
-@blnpurple (Challenges)\
-@canoobi (Challenge Generator)
+👩‍💻 **[blnpurple](https://github.com/blnpurple)** (Challenges)
+👨‍💻 **[Canoob](https://github.com/canoobi)** (Challenge Generator)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
