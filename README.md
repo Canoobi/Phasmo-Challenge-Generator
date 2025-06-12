@@ -54,8 +54,10 @@ In der Datei ```src\main\resources\penalties.json``` sind alle Penalties hinterl
 In der Datei ```src\main\resources\settings.json``` sind nötigen Einstellungen hinterlegt.
 
 ## Mitwirkende
-@blnpurple (Challenges)\
-@canoobi (Challenge Generator)
+👩‍💻 **[blnpurple](https://github.com/blnpurple)** (Challenges)\
+👨‍💻 **[Canoob](https://github.com/canoobi)** (Challenge Generator)
+
+<p align="right">(<a href="#readme-top">Zurück nach oben</a>)</p>
 
 # ---------------------------------------------
 
@@ -114,7 +116,7 @@ The file ```src\main\resources\penalties.json``` contains all penalties.
 The file ```src\main\resources\settings.json``` contains all necessary settings.
 
 ## Contributors
-👩‍💻 **[blnpurple](https://github.com/blnpurple)** (Challenges)
+👩‍💻 **[blnpurple](https://github.com/blnpurple)** (Challenges)\
 👨‍💻 **[Canoob](https://github.com/canoobi)** (Challenge Generator)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
